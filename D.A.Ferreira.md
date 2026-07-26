@@ -22,7 +22,7 @@ Agentic AI specialist focused on Cyber Security Operations and SOC automation. H
 
 Head of SOC for IT and OT across ~20 factories. Leading Threat Detection Engineering, Incident Response, Threat Intelligence, Threat Hunting, Vulnerability Management, Offensive Security and Platform Engineering teams. Owner of SIEM, XDR, EDR, CSPM, CASB and OT security platforms.
 
-- Shipped the [Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.
+- Shipped the [Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.
 - Built the harness: specialized agents/subagents, shipped the internal **Cyber MCP** with SSO auth.
 - Security engineering and operational delivery increased by ~5x.
 
@@ -106,7 +106,7 @@ EU officially accredited.
 
 ## Honours
 
-- **[Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html)** — Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations.
+- **[Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html)** — Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations.
 - **Shell Group CIO Award winner, twice** — Recognized for detecting material cyber risk and preventing ransomware-like opportunities.
 - **[Splunk .conf21 speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.conf21%20-%20SEC1075A%20-%20Effective%20and%20affordable%20Cyber-Security%20Vulnerability%20Management.pdf)** — Vulnerability Management at scale. Advanced level.
 - **[Splunk .confGO Netherlands speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.confGO%202022%20Hilversum%20-%20Your%20META(DATA)%20is%20QUEEN%20for%20Cyber-Security%20Vulnerability%20Management.pdf)** — How to build an internal Shodan-like search engine. Advanced level.

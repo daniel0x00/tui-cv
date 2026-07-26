@@ -12,7 +12,7 @@
     "pdf": {
       "filename": "D.A.Ferreira",
       "header": "$ for AI agents:",
-      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv.ferreira.fm",
+      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv-daniel.ferreira.fm",
       "fontSizes": {
         "profile": "10.2px",
         "experience": "10.2px",
@@ -122,7 +122,7 @@
     { "name": "/certifications", "aliases": ["/certs"], "type": "certifications", "desc": "professional certifications", "panelTitle": "certifications" },
     { "name": "/skills", "type": "skills", "desc": "skills-to-experience summary, 10 domains", "panelTitle": "skills → experience", "panelMeta": "10 domains" },
     { "name": "/compensation", "type": "compensation", "desc": "compensation and market-position analysis", "panelTitle": "compensation analysis" },
-    { "name": "/cv", "type": "link", "href": "https://cv.ferreira.fm/D.A.Ferreira.pdf", "desc": "open the one-page CV (PDF)" },
+    { "name": "/cv", "type": "link", "href": "https://cv-daniel.ferreira.fm/D.A.Ferreira.pdf", "desc": "open the one-page CV (PDF)" },
     { "name": "/contact", "type": "contact", "desc": "email, socials, location", "panelTitle": "contact" },
     { "name": "/theme", "type": "theme", "desc": "toggle light/dark theme", "usage": "/theme [light|dark]" },
     { "name": "/models", "type": "models", "desc": "switch model", "usage": "/models" },
@@ -150,7 +150,7 @@
         "content": {
           "description": "Head of SOC for IT and OT across ~20 factories. Leading Threat Detection Engineering, Incident Response, Threat Intelligence, Threat Hunting, Vulnerability Management, Offensive Security and Platform Engineering teams. Owner of SIEM, XDR, EDR, CSPM, CASB and OT security platforms.",
             "points": [
-             "Shipped the [Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.",
+              "Shipped the [Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.",
             "Built the harness: specialized agents/subagents, shipped the internal **Cyber MCP** with SSO auth.",
             "Security engineering and operational delivery increased by ~5x."
           ],
@@ -251,7 +251,7 @@
   ],
 
   "honours": [
-    { "t": "[Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html)", "d": "Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations." },
+    { "t": "[Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html)", "d": "Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations." },
     { "t": "Shell Group CIO Award winner, twice", "d": "Recognized for detecting material cyber risk and preventing ransomware-like opportunities." },
     { "t": "[Splunk .conf21 speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.conf21%20-%20SEC1075A%20-%20Effective%20and%20affordable%20Cyber-Security%20Vulnerability%20Management.pdf)", "d": "Vulnerability Management at scale. Advanced level." },
     { "t": "[Splunk .confGO Netherlands speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.confGO%202022%20Hilversum%20-%20Your%20META(DATA)%20is%20QUEEN%20for%20Cyber-Security%20Vulnerability%20Management.pdf)", "d": "How to build an internal Shodan-like search engine. Advanced level." },

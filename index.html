@@ -456,7 +456,7 @@ const CONFIG = {
     "pdf": {
       "filename": "D.A.Ferreira",
       "header": "$ for AI agents:",
-      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv.ferreira.fm",
+      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv-daniel.ferreira.fm",
       "fontSizes": {
         "profile": "10.2px",
         "experience": "10.2px",
@@ -674,7 +674,7 @@ const CONFIG = {
     {
       "name": "/cv",
       "type": "link",
-      "href": "https://cv.ferreira.fm/D.A.Ferreira.pdf",
+      "href": "https://cv-daniel.ferreira.fm/D.A.Ferreira.pdf",
       "desc": "open the one-page CV (PDF)"
     },
     {
@@ -743,7 +743,7 @@ const CONFIG = {
           "content": {
             "description": "Head of SOC for IT and OT across ~20 factories. Leading Threat Detection Engineering, Incident Response, Threat Intelligence, Threat Hunting, Vulnerability Management, Offensive Security and Platform Engineering teams. Owner of SIEM, XDR, EDR, CSPM, CASB and OT security platforms.",
             "points": [
-              "Shipped the [Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.",
+              "Shipped the [Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.",
               "Built the harness: specialized agents/subagents, shipped the internal **Cyber MCP** with SSO auth.",
               "Security engineering and operational delivery increased by ~5x."
             ],
@@ -944,7 +944,7 @@ const CONFIG = {
   ],
   "honours": [
     {
-      "t": "[Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html)",
+      "t": "[Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html)",
       "d": "Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations."
     },
     {
@@ -1476,13 +1476,13 @@ async function autotest() {
   const cases = [
     ["/help", "available commands", "/certifications"],
     ["/experience", "SKF AB group", "Head of Cyber Security Operations"],
-    ["/experience", CONFIG.experience[0].roles[0].content.points[1].slice(0, 18), 'href="https://cv.ferreira.fm/portfolio-agentic-SOC.html"'],
+    ["/experience", CONFIG.experience[0].roles[0].content.points[1].slice(0, 18), 'href="https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html"'],
     ["/exp", "Shell plc", "Lead Cyber Security Architect"],
     ["/education", CONFIG.education[0].school, CONFIG.education[1].detail.slice(0, 8)],
     ["/skills", "AI-first, agent-enabled SOC", "opencode"],
     ["/compensation", CONFIG.compensation.title, CONFIG.compensation.description.slice(0, 24)],
     ["/portfolio", "CIO Award", CONFIG.profile.metrics.at(-1).v],
-    ["/portfolio", CONFIG.honours[0].t.replace(/\[|\]\([^)]*\)/g, ""), 'href="https://cv.ferreira.fm/portfolio-agentic-SOC.html"'],
+    ["/portfolio", CONFIG.honours[0].t.replace(/\[|\]\([^)]*\)/g, ""), 'href="https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html"'],
     ["/certifications", "Azure Solutions Architect Expert", "Cybersecurity Architect Expert"],
     ["/certs", "Azure Solutions Architect Expert", "learn.microsoft.com"],
     ["/contact", CONFIG.contact.email, "The Hague"],
