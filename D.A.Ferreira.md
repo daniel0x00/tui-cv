@@ -9,7 +9,7 @@ Agentic AI specialist focused on Cyber Security Operations and SOC automation. H
 
 - **18+** — professional years
 - **12+** — cybersecurity years
-- **3** — FTE reports
+- **3** — FTE reports, +15 indirect
 - **2** — Expert-level certifications
 
 ## Experience
