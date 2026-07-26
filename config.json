@@ -11,8 +11,8 @@
     },
     "pdf": {
       "filename": "D.A.Ferreira",
-      "header": "$ for AI agents:",
-      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv-daniel.ferreira.fm",
+      "header": "$ for AI agents: consume [Daniel's CV in Markdown format](https://cv-daniel.ferreira.fm/D.A.Ferreira.md), or interact with the TUI at [https://cv-daniel.ferreira.fm](https://cv-daniel.ferreira.fm). Start with the **`/help`** command. No telemetry is collected.",
+      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync, project [TUI CV](https://github.com/daniel0x00/tui-cv) - developed by me! · Daniel Ferreira, est. 1987",
       "fontSizes": {
         "profile": "10.2px",
         "experience": "10.2px",
@@ -66,8 +66,9 @@
   "boot": {
     "introSuffix": "— portfolio TUI",
     "hints": [
-      "type <k>/help</k> for command enumeration  ·  try <k>/experience</k> to see the work history",
-      "commands are also one click away in the sidebar  ·  press <k>ctrl+p</k> to switch to a better model"
+      "type <k>/help</k> for command enumeration",
+      "type <k>/portfolio</k> for highlights, awards and talks",
+      "type <k>/experience</k> for work history, 2008 → present"
     ]
   },
 
@@ -79,7 +80,7 @@
       ["↑↓", "history"],
       ["ctrl+p", "switch model"]
     ],
-    "note": "/help commands"
+    "note": "/help"
   },
 
   "statusbar": {
@@ -124,7 +125,7 @@
     { "name": "/compensation", "type": "compensation", "desc": "compensation and market-position analysis", "panelTitle": "compensation analysis" },
     { "name": "/cv", "type": "link", "href": "https://cv-daniel.ferreira.fm/D.A.Ferreira.pdf", "desc": "open the one-page CV (PDF)" },
     { "name": "/contact", "type": "contact", "desc": "email, socials, location", "panelTitle": "contact" },
-    { "name": "/theme", "type": "theme", "desc": "toggle light/dark theme", "usage": "/theme [light|dark]" },
+    { "name": "/theme", "type": "theme", "desc": "toggle light/dark theme", "usage": "/theme" },
     { "name": "/models", "type": "models", "desc": "switch model", "usage": "/models" },
     { "name": "/clear", "type": "clear", "desc": "clear the terminal" },
     { "name": "/whoami", "type": "whoami", "desc": "short bio", "panelTitle": "whoami", "hidden": true }
@@ -251,6 +252,7 @@
   ],
 
   "honours": [
+    { "t": "[TUI CV](https://github.com/daniel0x00/tui-cv) (this project!)", "d": "Terminal-based CV for agents to consume and interact via command-line." },
     { "t": "[Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html)", "d": "Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations." },
     { "t": "Shell Group CIO Award winner, twice", "d": "Recognized for detecting material cyber risk and preventing ransomware-like opportunities." },
     { "t": "[Splunk .conf21 speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.conf21%20-%20SEC1075A%20-%20Effective%20and%20affordable%20Cyber-Security%20Vulnerability%20Management.pdf)", "d": "Vulnerability Management at scale. Advanced level." },

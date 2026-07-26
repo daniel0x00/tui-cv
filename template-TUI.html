@@ -201,7 +201,7 @@
   .kv dt { color: var(--text-dim); font-size: 16px; }
   .kv dd { margin: 0; color: var(--text-soft); font-size: 17px; overflow-wrap: anywhere; }
   .help-grid { display: grid; gap: 3px; }
-  .help-grid .hrow { display: grid; grid-template-columns: 220px 1fr; gap: 12px; }
+  .help-grid .hrow { display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr); gap: 12px; }
   .help-grid .hcmd { color: var(--accent); font-weight: 700; white-space: nowrap; }
   .help-grid .hcmd a { color: var(--cyan); }
   .help-grid .hcmd button {
@@ -383,7 +383,9 @@
     .sidebar.open { transform: none; }
     .overlay.show { display: block; position: fixed; inset: 0; z-index: 25; background: rgba(0,0,0,.45); }
     .menu-btn { display: block; }
-    .help-grid .hrow, .sug { grid-template-columns: 165px 1fr; }
+    .help-grid .hrow { display: block; }
+    .help-grid .hdesc { margin-top: 1px; }
+    .sug { grid-template-columns: 165px 1fr; }
     .kv { grid-template-columns: 130px 1fr; }
     .statusbar .lhs > span:last-child, .statusbar .rhs > span:last-child { display: none; }
     .keys { flex-wrap: wrap; }
@@ -494,7 +496,7 @@ function panel(title, body, meta = "") {
 function rHelp(cmd) {
   const visible = COMMANDS.filter(c => !c.hidden);
   const rows = visible
-    .map(c => `<div class="hrow"><span class="hcmd">${c.type === "link" ? `<a href="${esc(c.href)}" target="_blank" rel="noopener noreferrer">${esc(c.name)} ↗</a>` : `<button type="button" data-run="${esc(c.name)}">${esc(c.usage || c.name)}</button>`}</span><span class="hdesc">${esc(c.desc)}</span></div>`)
+    .map(c => `<div class="hrow"><span class="hcmd">${c.type === "link" ? `<a href="${esc(c.href)}" target="_blank" rel="noopener noreferrer">${esc(c.name)} ↗</a>` : `<button type="button" data-run="${esc(c.name)}">${esc(commandUsage(c))}</button>`}</span><span class="hdesc">${esc(c.desc)}</span></div>`)
     .join("");
   return panel(cmd.panelTitle, `<div class="help-grid">${rows}</div>
     <p class="desc" style="margin-top:10px">${kfmt(CONFIG.messages.helpTip)}</p>`, cmd.panelMeta || `${visible.length} commands`);
@@ -625,6 +627,24 @@ const COMMANDS = enabledCommands(CONFIG.commands)
 function findCommand(word) {
   const w = word.toLowerCase();
   return COMMANDS.find(c => c.name === w || (c.aliases || []).includes(w));
+}
+
+function commandUsage(command) {
+  return command.type === "theme"
+    ? String(command.usage || command.name).replace(/\s+\[light\|dark\]\s*$/i, "")
+    : (command.usage || command.name);
+}
+
+function commandLink(token) {
+  const value = String(token).trim();
+  return findCommand(value)
+    ? `<a href="#" data-run="${esc(value)}">${esc(value)}</a>`
+    : esc(token);
+}
+
+function bootHint(hint) {
+  return kfmt(hint).replace(/<span class="k">(\/[A-Za-z0-9_-]+)<\/span>/g,
+    (match, token) => findCommand(token) ? commandLink(token) : match);
 }
 
 /* ============================== engine ============================== */
@@ -762,12 +782,10 @@ suggestEl.addEventListener("mousedown", (e) => {
   input.focus();
 });
 
-scrollEl.addEventListener("click", (e) => {
+$("#term").addEventListener("click", (e) => {
   const runEl = e.target.closest("[data-run]");
   if (runEl) { e.preventDefault(); exec(runEl.dataset.run); }
-});
-
-$("#term").addEventListener("click", (e) => {
+  if (runEl) return;
   if (e.target.closest("a, button, .panel-body, .suggest")) return;
   if (window.getSelection().toString()) return;
   input.focus();
@@ -822,7 +840,8 @@ function renderChrome() {
   input.placeholder = CONFIG.composer.placeholder;
   $("#keysLeft").innerHTML = CONFIG.composer.keys
     .map(([k, l]) => `<span class="k">${esc(k)}</span> ${esc(l)}`).join("&nbsp;&nbsp;");
-  $("#keysRight").textContent = CONFIG.composer.note;
+  const note = String(CONFIG.composer.note || "").trim();
+  $("#keysRight").innerHTML = findCommand(note) ? commandLink(note) : esc(CONFIG.composer.note);
   const st = CONFIG.statusbar;
   $("#statusLhs").innerHTML = `<span class="tag">${esc(st.tag)}</span><span>${esc(st.path)}</span>`;
   $("#statusRhs").innerHTML = `<span class="theme-toggle" id="themeToggle" role="button" tabindex="0" title="toggle theme (/theme)"></span><span class="dot">●</span><span>${esc(st.model)}</span><span>${esc(st.context)}</span>`;
@@ -915,7 +934,7 @@ function boot() {
     push(`<div class="intro"><b>${esc(CONFIG.profile.name)}</b> ${esc(CONFIG.boot.introSuffix)}<br>
       <span class="role">${esc(CONFIG.profile.title)}</span></div>`);
   }
-  push(`<div class="hint">${CONFIG.boot.hints.map(kfmt).join("<br>")}</div>`);
+  push(`<div class="hint">${CONFIG.boot.hints.map(bootHint).join("<br>")}</div>`);
   input.focus();
 }
 boot();
@@ -936,7 +955,7 @@ async function autotest() {
     ["/skills", "AI-first, agent-enabled SOC", "opencode"],
     ["/compensation", CONFIG.compensation.title, CONFIG.compensation.description.slice(0, 24)],
     ["/portfolio", "CIO Award", CONFIG.profile.metrics.at(-1).v],
-    ["/portfolio", CONFIG.honours[0].t.replace(/\[|\]\([^)]*\)/g, ""), 'href="https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html"'],
+    ["/portfolio", CONFIG.honours[0].t.split(/[[(]/, 1)[0].trim(), 'href="https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html"'],
     ["/certifications", "Azure Solutions Architect Expert", "Cybersecurity Architect Expert"],
     ["/certs", "Azure Solutions Architect Expert", "learn.microsoft.com"],
     ["/contact", CONFIG.contact.email, "The Hague"],
@@ -948,6 +967,13 @@ async function autotest() {
     check(`${cmd} shows "${m1}"`, h.includes(m1));
     check(`${cmd} shows "${m2}"`, h.includes(m2));
   }
+  const bootHintLink = document.querySelector(".hint [data-run]");
+  check("boot hints render command tokens as safe run links", !!bootHintLink
+    && bootHintLink.getAttribute("data-run") === "/help"
+    && bootHintLink.textContent === "/help");
+  bootHintLink?.click();
+  await new Promise(resolve => setTimeout(resolve, 520));
+  check("boot hint link runs its command", lastHTML().includes("available commands"));
   const reducedSections = new Set(["profile"]);
   const reducedCommands = enabledCommands(CONFIG.commands, reducedSections).map(command => command.name);
   check("reduced TUI selection omits unavailable feature commands", !reducedCommands.includes("/experience")
@@ -1045,6 +1071,7 @@ async function autotest() {
     const help = rHelp(COMMANDS.find(command => command.name === "/help"));
     return help.includes('data-run="/models"') && help.includes("<button") && !help.includes('data-run="/cv"');
   })());
+  check("/help omits the theme choices from its usage label", !rHelp(COMMANDS.find(command => command.name === "/help")).includes("[light|dark]"));
   await exec("/models", { instant: true, silent: true });
   check("/models opens the model selection modal", modelOverlay.classList.contains("open")
     && modelList.querySelectorAll(".model-row").length === MODELS.length);
@@ -1069,6 +1096,13 @@ async function autotest() {
   check("side footer rendered from config", $("#sideFoot").textContent.includes(CONFIG.sidebar.footer[0].text));
   check("placeholder from config", input.placeholder === CONFIG.composer.placeholder);
   check("keys bar from config", $("#keysLeft").textContent.includes(CONFIG.composer.keys[0][0]));
+  const composerHelp = $("#keysRight").querySelector("[data-run]");
+  check("composer /help note renders as a safe run link", !!composerHelp
+    && composerHelp.getAttribute("data-run") === "/help"
+    && composerHelp.textContent === "/help");
+  composerHelp?.click();
+  await new Promise(resolve => setTimeout(resolve, 520));
+  check("composer /help note runs its command", lastHTML().includes("available commands"));
   check("page title from config", document.title === CONFIG.meta.title);
 
   /* ctrl+p easter egg */

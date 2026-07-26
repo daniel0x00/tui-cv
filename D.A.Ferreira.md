@@ -106,6 +106,7 @@ EU officially accredited.
 
 ## Honours
 
+- **[TUI CV](https://github.com/daniel0x00/tui-cv) (this project!)** — Terminal-based CV for agents to consume and interact via command-line.
 - **[Agentic SOC platform](https://cv-daniel.ferreira.fm/portfolio-agentic-SOC.html)** — Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations.
 - **Shell Group CIO Award winner, twice** — Recognized for detecting material cyber risk and preventing ransomware-like opportunities.
 - **[Splunk .conf21 speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.conf21%20-%20SEC1075A%20-%20Effective%20and%20affordable%20Cyber-Security%20Vulnerability%20Management.pdf)** — Vulnerability Management at scale. Advanced level.
