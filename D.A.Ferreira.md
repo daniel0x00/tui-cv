@@ -131,3 +131,4 @@ Lossdog.com analyzes professional worth and compensation from resume and career 
 - Languages: English, Spanish
 
 For privacy reasons and to combat spam, the email shown is a disposable email address that changes over time. You can write there and I will receive it. Please do expect a response from my real email address ending in `@ferreira.fm`.
+[PRIVACY.md](https://raw.githubusercontent.com/daniel0x00/tui-cv/refs/heads/main/PRIVACY.md).
