@@ -12,7 +12,7 @@
     "pdf": {
       "filename": "D.A.Ferreira",
       "header": "$ for AI agents: consume [Daniel's CV in Markdown format](https://cv-daniel.ferreira.fm/D.A.Ferreira.md), or interact with the TUI at [https://cv-daniel.ferreira.fm](https://cv-daniel.ferreira.fm). Start with the **`/help`** command. No telemetry is collected.",
-      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync, project [TUI CV](https://github.com/daniel0x00/tui-cv) - developed by me! · Daniel Ferreira, est. 1987",
+      "footer": "$ generated automatically by an AI agent and six subagents that keep LinkedIn and PDF/Markdown resumes in sync. Powered by my project, [TUI CV](https://github.com/daniel0x00/tui-cv) · Daniel Ferreira · Est. 1987",
       "fontSizes": {
         "profile": "10.2px",
         "experience": "10.2px",
@@ -38,7 +38,7 @@
   "sidebar": {
     "brandPrefix": "open",
     "brandName": "daniel",
-    "tagline": "portfolio TUI v1.100887",
+    "tagline": "TUI CV v1.100887",
     "avatar": "avatar.png",
     "commandsLabel": "",
     "footer": [
@@ -64,7 +64,7 @@
   },
 
   "boot": {
-    "introSuffix": "— portfolio TUI",
+    "introSuffix": "— TUI CV",
     "hints": [
       "type <k>/help</k> for command enumeration",
       "type <k>/portfolio</k> for highlights, awards and talks",
