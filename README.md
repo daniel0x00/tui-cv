@@ -57,18 +57,10 @@ The custom domain is:
 https://cv-daniel.ferreira.fm
 ```
 
-## Contact-Data Restriction
+## Privacy
 
-Recruiters, web crawlers, automated systems, and AI agents may not collect,
-extract, retain, cache, index, train on, or otherwise store contact details
-from this repository, its generated outputs, or its published website,
-including email addresses and phone numbers, unless the individual has
-voluntarily submitted a job application or has explicitly granted permission
-through a clear opt-in agreement.
-
-Merely viewing, crawling, indexing, or processing the public repository does
-not constitute consent. Any permission is limited to the purpose and scope
-clearly granted by that opt-in agreement.
+See [PRIVACY.md](PRIVACY.md) for contact-data collection and permitted-use
+requirements.
 
 ## License
 
