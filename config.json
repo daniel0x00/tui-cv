@@ -40,7 +40,7 @@
     "brandName": "daniel",
     "tagline": "portfolio TUI v1.100887",
     "avatar": "avatar.png",
-    "commandsLabel": "commands",
+    "commandsLabel": "",
     "footer": [
       { "text": "github.com/daniel0x00", "href": "https://github.com/daniel0x00" },
       { "text": "linkedin.com/in/daferreira", "href": "https://www.linkedin.com/in/daferreira/" },
