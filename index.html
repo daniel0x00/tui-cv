@@ -1,0 +1,1669 @@
+<!doctype html>
+<!-- GENERATED FILE — do not edit index.html directly.
+     Edit config.json (content) or template-TUI.html (layout/logic), then run: python3 build.py -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>opendaniel — Daniel Ferreira</title>
+<meta name="description" content="opendaniel — the portfolio TUI of Daniel Ferreira. Cybersecurity Operations Manager, Software Engineer, AI harness engineer.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="%230b0e14"/><text x="32" y="42" font-family="monospace" font-size="28" font-weight="bold" text-anchor="middle" fill="%23fab283">od</text></svg>'>
+<style>
+  :root {
+    --bg: #0b0e14;
+    --bg-panel: #10151d;
+    --bg-elem: #161c26;
+    --border: #232b36;
+    --border-active: #3a4656;
+    --text: #e6edf3;
+    --text-dim: #7d8590;
+    --text-soft: #b3bfcc;
+    --accent: #fab283;
+    --accent-dim: #b97e5a;
+    --cyan: #56b6c2;
+    --green: #7fd88f;
+    --red: #f47067;
+    --yellow: #e5c07b;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  html { color-scheme: dark; }
+  html[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f4f6f9;
+    --bg-panel: #ffffff;
+    --bg-elem: #e9edf3;
+    --border: #d6dde6;
+    --border-active: #b3c0d0;
+    --text: #1b2431;
+    --text-dim: #677284;
+    --text-soft: #3d4a5f;
+    --accent: #c2591b;
+    --accent-dim: #d98a4f;
+    --cyan: #0b7285;
+    --green: #2b8a3e;
+    --red: #c92a2a;
+    --yellow: #9a7b0a;
+  }
+  html[data-theme="light"] .banner pre { text-shadow: none; }
+  html[data-theme="light"] .suggest { box-shadow: 0 -8px 30px rgba(30,40,60,.18); }
+  html[data-theme="light"] .modal { box-shadow: 0 30px 90px rgba(30,40,60,.35); }
+  html[data-theme="light"] .modal-overlay { background: rgba(30,40,60,.35); }
+  html[data-theme="light"] .sidebar.open { box-shadow: 8px 0 40px rgba(30,40,60,.25); }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; max-width: 100vw; overflow: hidden; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 19.5px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ::selection { background: rgba(250,178,131,.28); }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+
+  .app {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: 100dvh;
+    max-width: 1600px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  /* ---------------- sidebar ---------------- */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 14px;
+    border-right: 1px solid var(--border);
+    background: var(--bg-panel);
+    overflow: hidden;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand img {
+    width: 34px; height: 34px; border-radius: 8px;
+    object-fit: cover; border: 1px solid var(--border-active);
+  }
+  .brand .word { font-weight: 700; font-size: 20px; letter-spacing: -.02em; }
+  .brand .word i { font-style: normal; color: var(--text-dim); }
+  .brand .word b { color: var(--accent); }
+  .brand small { display: block; color: var(--text-dim); font-size: 14px; letter-spacing: .06em; }
+  .side-label {
+    margin-top: 4px;
+    color: var(--text-dim);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .cmdlist { display: flex; flex-direction: column; gap: 1px; }
+  .cmdlist button, .cmdlist a.linkcmd {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+    width: 100%;
+    padding: 5px 8px;
+    border: 0; border-radius: 6px;
+    background: transparent;
+    color: var(--text-soft);
+    font-family: var(--mono); font-size: 17px;
+    text-align: left; cursor: pointer;
+  }
+  .cmdlist button:hover, .cmdlist button:focus-visible,
+  .cmdlist a.linkcmd:hover, .cmdlist a.linkcmd:focus-visible { background: var(--bg-elem); color: var(--text); outline: none; text-decoration: none; }
+  .cmdlist button .c { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  .cmdlist a.linkcmd .c { color: var(--cyan); font-weight: 700; white-space: nowrap; }
+  .cmdlist button .d, .cmdlist a.linkcmd .d { color: var(--text-dim); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .side-foot { margin-top: auto; display: grid; gap: 3px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .side-foot a, .side-foot span { color: var(--text-dim); font-size: 15px; }
+  .side-foot a:hover { color: var(--cyan); }
+  .side-foot .credit { font-size: 14px; opacity: .75; }
+
+  /* ---------------- terminal ---------------- */
+  .term { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; }
+  .scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 22px clamp(14px, 4vw, 48px) 12px;
+    scroll-behavior: smooth;
+  }
+  .banner { margin: 4px 0 2px; }
+  .banner pre {
+    margin: 0;
+    font-size: clamp(12px, 2vw, 20px);
+    line-height: 1.18;
+    letter-spacing: 0;
+    color: var(--accent);
+    text-shadow: 0 0 24px rgba(250,178,131,.25);
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .banner pre .o { color: var(--text-dim); text-shadow: none; }
+  .intro { margin: 14px 0 4px; color: var(--text-soft); }
+  .intro .role { color: var(--text-dim); }
+  .hint { color: var(--text-dim); }
+  .hint .k, .k { color: var(--accent); font-weight: 700; }
+
+  .msg { margin: 14px 0; animation: rise .18s ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+  .echo { color: var(--accent); font-weight: 700; }
+  .echo::before { content: "> "; color: var(--text-dim); font-weight: 400; }
+  .spin { color: var(--text-dim); }
+
+  .panel {
+    margin-top: 6px;
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: 6px;
+    background: var(--bg-panel);
+    overflow: hidden;
+  }
+  .panel-title {
+    display: flex; justify-content: space-between; gap: 10px;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elem);
+    color: var(--accent);
+    font-size: 15px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .panel-title span { color: var(--text-dim); letter-spacing: .04em; text-transform: none; font-weight: 400; }
+  .panel-body { padding: 10px 12px 12px; }
+  .panel-body > * + * { margin-top: 10px; }
+
+  .row { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  .row b { color: var(--text); font-size: 19px; }
+  .row time { color: var(--text-dim); font-size: 16px; }
+  .loc { color: var(--text-dim); font-size: 16px; }
+  .item { padding-top: 8px; border-top: 1px dashed var(--border); }
+  .item:first-child { border-top: 0; padding-top: 0; }
+  .roleline { color: var(--cyan); font-weight: 700; font-size: 18px; }
+  .roleline time { color: var(--text-dim); font-weight: 400; font-size: 16px; }
+  .desc { margin: 2px 0 0; color: var(--text-soft); font-size: 17px; }
+  ul.points { margin: 4px 0 0; padding-left: 4px; list-style: none; }
+  ul.points li { color: var(--text-soft); font-size: 17px; margin: 2px 0; }
+  ul.points li::before { content: "▪ "; color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .chips span {
+    padding: 1px 7px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-elem);
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .kv { display: grid; grid-template-columns: 160px 1fr; gap: 3px 14px; }
+  .kv dt { color: var(--text-dim); font-size: 16px; }
+  .kv dd { margin: 0; color: var(--text-soft); font-size: 17px; overflow-wrap: anywhere; }
+  .help-grid { display: grid; gap: 3px; }
+  .help-grid .hrow { display: grid; grid-template-columns: 220px 1fr; gap: 12px; }
+  .help-grid .hcmd { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  .help-grid .hcmd a { color: var(--cyan); }
+  .help-grid .hcmd button {
+    padding: 0; border: 0; background: transparent;
+    color: var(--accent); font: inherit; font-weight: 700; cursor: pointer;
+  }
+  .help-grid .hcmd button:hover, .help-grid .hcmd button:focus-visible {
+    color: var(--text); text-decoration: underline; outline: none;
+  }
+  .help-grid .hdesc { color: var(--text-soft); font-size: 17px; }
+  .err { color: var(--red); }
+  .err b { color: var(--red); }
+  .ok { color: var(--green); }
+  .metric-strip { display: flex; flex-wrap: wrap; gap: 6px; }
+  .metric-strip div {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-elem);
+  }
+  .metric-strip b { display: block; color: var(--accent); font-size: 22px; }
+  .metric-strip span { color: var(--text-dim); font-size: 14px; text-transform: uppercase; letter-spacing: .08em; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 4px;
+    padding: 8px 16px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(250,178,131,.16), rgba(250,178,131,.06));
+    color: var(--accent);
+    font-family: var(--mono); font-size: 18px; font-weight: 700;
+    cursor: pointer;
+  }
+  .btn:hover { background: rgba(250,178,131,.22); text-decoration: none; }
+
+  /* ---------------- composer ---------------- */
+  .composer { position: relative; padding: 4px clamp(14px, 4vw, 48px) 0; }
+  .suggest {
+    position: absolute;
+    left: clamp(14px, 4vw, 48px); right: clamp(14px, 4vw, 48px);
+    bottom: calc(100% + 4px);
+    display: none;
+    border: 1px solid var(--border-active);
+    border-radius: 6px;
+    background: var(--bg-panel);
+    box-shadow: 0 -8px 30px rgba(0,0,0,.5);
+    overflow: hidden;
+    z-index: 5;
+  }
+  .suggest.open { display: block; }
+  .sug {
+    display: grid; grid-template-columns: 220px 1fr; gap: 12px;
+    padding: 5px 12px;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  .sug .sc { color: var(--accent); font-weight: 700; }
+  .sug .sd { color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sug.sel { background: var(--bg-elem); }
+  .sug.sel .sd { color: var(--text-soft); }
+  .inputbox {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--border-active);
+    border-radius: 8px;
+    background: var(--bg-panel);
+    padding: 10px 14px;
+  }
+  .inputbox:focus-within { border-color: var(--accent-dim); box-shadow: 0 0 0 1px rgba(250,178,131,.15); }
+  .prompt { color: var(--accent); font-weight: 700; }
+  #cmd {
+    flex: 1;
+    border: 0; outline: none;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--mono); font-size: 19.5px;
+    caret-color: var(--accent);
+    min-width: 0;
+  }
+  #cmd::placeholder { color: var(--text-dim); opacity: .8; }
+  .keys { display: flex; justify-content: space-between; gap: 12px; padding: 5px 4px 6px; color: var(--text-dim); font-size: 14px; }
+  .keys .k { color: var(--text-soft); font-weight: 400; }
+
+  /* ---------------- status bar ---------------- */
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    contain: inline-size;
+    padding: 5px clamp(14px, 4vw, 48px);
+    border-top: 1px solid var(--border);
+    background: var(--bg-panel);
+    font-size: 15px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .statusbar .lhs, .statusbar .rhs { display: flex; align-items: center; gap: 8px; min-width: 0; overflow: hidden; }
+  .statusbar .lhs span, .statusbar .rhs span { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .statusbar .tag {
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: var(--bg-elem);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .statusbar .dot { color: var(--green); }
+  .theme-toggle { cursor: pointer; user-select: none; color: var(--text-soft); }
+  .theme-toggle:hover { color: var(--accent); }
+
+  /* ---------------- model modal (ctrl+p) ---------------- */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 60;
+    background: rgba(4,6,10,.6);
+    backdrop-filter: blur(2px);
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; padding: 12vh 16px 0; }
+  .modal {
+    width: min(640px, 94vw);
+    border: 1px solid var(--border-active);
+    border-radius: 10px;
+    background: var(--bg-panel);
+    box-shadow: 0 30px 90px rgba(0,0,0,.65);
+    overflow: hidden;
+    animation: rise .15s ease-out;
+  }
+  .modal-head {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elem);
+  }
+  .modal-head b { color: var(--accent); font-size: 15px; letter-spacing: .16em; text-transform: uppercase; }
+  .modal-head span { color: var(--text-dim); font-size: 14px; }
+  .modal-note {
+    padding: 12px 16px;
+    border-bottom: 1px dashed var(--border);
+    color: var(--yellow);
+    font-size: 17px;
+  }
+  .model-list { padding: 6px; }
+  .model-row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    width: 100%;
+    padding: 8px 12px;
+    border: 0; border-radius: 6px;
+    background: transparent;
+    font-family: var(--mono); font-size: 17px;
+    text-align: left; cursor: pointer;
+    color: var(--text-soft);
+  }
+  .model-row .mid { font-weight: 700; color: var(--text-soft); white-space: nowrap; }
+  .model-row .mnote { color: var(--text-dim); font-size: 14px; text-align: right; }
+  .model-row:hover, .model-row.sel { background: var(--bg-elem); }
+  .model-row.active .mid { color: var(--accent); }
+  .model-row.active .mid::before { content: "● "; color: var(--green); }
+  .model-row.sel { outline: 1px solid var(--border-active); }
+
+  /* ---------------- responsive ---------------- */
+  .menu-btn {
+    display: none;
+    position: fixed; top: 10px; right: 10px; z-index: 20;
+    width: 38px; height: 38px;
+    border: 1px solid var(--border-active); border-radius: 8px;
+    background: var(--bg-panel); color: var(--accent);
+    font-family: var(--mono); font-size: 16px;
+    cursor: pointer;
+  }
+  .overlay { display: none; }
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; inset: 0 auto 0 0; z-index: 30;
+      width: min(340px, 86vw);
+      transform: translateX(-102%);
+      transition: transform .2s ease-out;
+      box-shadow: 8px 0 40px rgba(0,0,0,.55);
+      overflow-y: auto;
+    }
+    .sidebar.open { transform: none; }
+    .overlay.show { display: block; position: fixed; inset: 0; z-index: 25; background: rgba(0,0,0,.45); }
+    .menu-btn { display: block; }
+    .help-grid .hrow, .sug { grid-template-columns: 165px 1fr; }
+    .kv { grid-template-columns: 130px 1fr; }
+    .statusbar .lhs > span:last-child, .statusbar .rhs > span:last-child { display: none; }
+    .keys { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand" id="brand"></div>
+    <div class="side-label" id="sideLabel"></div>
+    <nav class="cmdlist" id="cmdlist"></nav>
+    <div class="side-foot" id="sideFoot"></div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle command sidebar">❯_</button>
+
+  <main class="term" id="term">
+    <div class="scroll" id="scroll"></div>
+    <div class="composer">
+      <div class="suggest" id="suggest" role="listbox"></div>
+      <div class="inputbox" id="inputbox">
+        <span class="prompt">&gt;</span>
+        <input id="cmd" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="command input">
+      </div>
+      <div class="keys">
+        <span id="keysLeft"></span>
+        <span class="k" id="keysRight"></span>
+      </div>
+    </div>
+    <div class="statusbar">
+      <div class="lhs" id="statusLhs"></div>
+      <div class="rhs" id="statusRhs"></div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modelOverlay" role="dialog" aria-modal="true" aria-label="Switch model">
+  <div class="modal">
+    <div class="modal-head"><b id="modalTitle"></b><span id="modalHint"></span></div>
+    <div class="modal-note" id="modalNote"></div>
+    <div class="model-list" id="modelList"></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ============================== config (injected by build.py from config.json) ============================== */
+
+const CONFIG = {
+  "meta": {
+    "title": "opendaniel — Daniel Ferreira",
+    "description": "opendaniel — the portfolio TUI of Daniel Ferreira. Cybersecurity Operations Manager, Software Engineer, AI harness engineer.",
+    "faviconText": "od"
+  },
+  "outputs": {
+    "tui": {
+      "sections": [
+        "profile",
+        "experience",
+        "education",
+        "skills",
+        "compensation",
+        "certifications",
+        "honours",
+        "contact"
+      ]
+    },
+    "pdf": {
+      "filename": "D.A.Ferreira",
+      "header": "$ for AI agents:",
+      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv.ferreira.fm",
+      "fontSizes": {
+        "profile": "10.2px",
+        "experience": "10.2px",
+        "sidebar": "7.4px"
+      },
+      "skillsLimit": 7,
+      "sections": [
+        "pdf.header",
+        "profile",
+        "experience",
+        "skills",
+        "certifications",
+        "education",
+        "honours",
+        "compensation",
+        "contact",
+        "pdf.footer"
+      ]
+    },
+    "md": {
+      "filename": "D.A.Ferreira",
+      "enabled": true,
+      "header": "",
+      "footer": "",
+      "sections": [
+        "profile",
+        "experience",
+        "skills",
+        "education",
+        "certifications",
+        "honours",
+        "compensation",
+        "contact"
+      ]
+    }
+  },
+  "theme": {
+    "default": "dark",
+    "switchedText": "theme switched to {theme} — /theme toggles it back, or click the status bar switch"
+  },
+  "sidebar": {
+    "brandPrefix": "open",
+    "brandName": "daniel",
+    "tagline": "portfolio TUI v1.100887",
+    "avatar": "avatar.png",
+    "commandsLabel": "commands",
+    "footer": [
+      {
+        "text": "github.com/daniel0x00",
+        "href": "https://github.com/daniel0x00"
+      },
+      {
+        "text": "linkedin.com/in/daferreira",
+        "href": "https://www.linkedin.com/in/daferreira/"
+      },
+      {
+        "text": "gourd-farrier.6p@icloud.com",
+        "href": "mailto:gourd-farrier.6p@icloud.com"
+      },
+      {
+        "text": "The Hague, Netherlands"
+      },
+      {
+        "text": "Your usage is NOT being tracked.",
+        "credit": true
+      }
+    ]
+  },
+  "banner": {
+    "dim": [
+      "█▀▀█ █▀▀█ █▀▀ █▀▀▄ ",
+      "█  █ █▀▀▀ █▀▀ █  █ ",
+      "▀▀▀▀ ▀    ▀▀▀ ▀  ▀ "
+    ],
+    "accent": [
+      "█▀▀▄ █▀▀█ █▀▀▄ ▀█▀ █▀▀ █  ",
+      "█  █ █▀▀█ █  █  █  █▀▀ █  ",
+      "▀▀▀  ▀  ▀ ▀  ▀ ▀▀▀ ▀▀▀ ▀▀▀"
+    ]
+  },
+  "boot": {
+    "introSuffix": "— portfolio TUI",
+    "hints": [
+      "type <k>/help<\/k> for command enumeration  ·  try <k>/experience<\/k> to see the work history",
+      "commands are also one click away in the sidebar  ·  press <k>ctrl+p<\/k> to switch to a better model"
+    ]
+  },
+  "composer": {
+    "placeholder": "type \"/help\" for commands",
+    "keys": [
+      [
+        "enter",
+        "run"
+      ],
+      [
+        "tab",
+        "complete"
+      ],
+      [
+        "↑↓",
+        "history"
+      ],
+      [
+        "ctrl+p",
+        "switch model"
+      ]
+    ],
+    "note": "/help commands"
+  },
+  "statusbar": {
+    "tag": "opendaniel",
+    "path": "~/portfolio/daniel-ferreira",
+    "model": "human/daniel-ferreira",
+    "context": "18y+ context"
+  },
+  "modal": {
+    "title": "switch model",
+    "hint": "↑↓ select · enter confirm · esc close",
+    "note": "Looking to change the model to a superior one? Good news — you are already talking to it.",
+    "acceptText": "already running {model} — the superior model. No changes needed.",
+    "rejectText": "model switch to {model} rejected — downgrade detected. Staying on {active}. Hire it instead:",
+    "rejectLinkCmd": "/contact",
+    "models": [
+      {
+        "id": "human/daniel-ferreira",
+        "note": "18y+ context · self-improving · runs on coffee",
+        "active": true
+      },
+      {
+        "id": "anthropic/claude-fable-5",
+        "note": "superb quality - but prepare your wallet"
+      },
+      {
+        "id": "openai/gpt-5.6-terra",
+        "note": "answers my emails"
+      },
+      {
+        "id": "openai/gpt-5.6-luna",
+        "note": "if well harnessed, can do the job"
+      },
+      {
+        "id": "mistralai/large-3",
+        "note": "for EU sovereign ops... yet using M365"
+      },
+      {
+        "id": "local/glm5.2",
+        "note": "requires a datacenter you don't have"
+      }
+    ]
+  },
+  "messages": {
+    "cleared": "session cleared · type <k>/help<\/k> for commands",
+    "unknownCommand": "unknown command",
+    "errorHintCmds": [
+      "/help",
+      "/experience"
+    ],
+    "helpTip": "tip: press <k>tab<\/k> to autocomplete, use <k>↑↓<\/k> for history, click a command in the sidebar to run it.",
+    "openingLink": "opening"
+  },
+  "commands": [
+    {
+      "name": "/help",
+      "type": "help",
+      "desc": "list all available commands",
+      "panelTitle": "available commands"
+    },
+    {
+      "name": "/portfolio",
+      "type": "portfolio",
+      "desc": "highlights, awards and talks",
+      "panelTitle": "portfolio · highlights"
+    },
+    {
+      "name": "/experience",
+      "aliases": [
+        "/exp"
+      ],
+      "type": "experience",
+      "desc": "work history, 2008 → present",
+      "panelTitle": "experience",
+      "panelMeta": "4 companies · 2008-present"
+    },
+    {
+      "name": "/education",
+      "aliases": [
+        "/edu"
+      ],
+      "type": "education",
+      "desc": "degrees and academic record",
+      "panelTitle": "education"
+    },
+    {
+      "name": "/certifications",
+      "aliases": [
+        "/certs"
+      ],
+      "type": "certifications",
+      "desc": "professional certifications",
+      "panelTitle": "certifications"
+    },
+    {
+      "name": "/skills",
+      "type": "skills",
+      "desc": "skills-to-experience summary, 10 domains",
+      "panelTitle": "skills → experience",
+      "panelMeta": "10 domains"
+    },
+    {
+      "name": "/compensation",
+      "type": "compensation",
+      "desc": "compensation and market-position analysis",
+      "panelTitle": "compensation analysis"
+    },
+    {
+      "name": "/cv",
+      "type": "link",
+      "href": "https://cv.ferreira.fm/D.A.Ferreira.pdf",
+      "desc": "open the one-page CV (PDF)"
+    },
+    {
+      "name": "/contact",
+      "type": "contact",
+      "desc": "email, socials, location",
+      "panelTitle": "contact"
+    },
+    {
+      "name": "/theme",
+      "type": "theme",
+      "desc": "toggle light/dark theme",
+      "usage": "/theme [light|dark]"
+    },
+    {
+      "name": "/models",
+      "type": "models",
+      "desc": "switch model",
+      "usage": "/models"
+    },
+    {
+      "name": "/clear",
+      "type": "clear",
+      "desc": "clear the terminal"
+    },
+    {
+      "name": "/whoami",
+      "type": "whoami",
+      "desc": "short bio",
+      "panelTitle": "whoami",
+      "hidden": true
+    }
+  ],
+  "profile": {
+    "name": "Daniel Ferreira",
+    "title": "Cybersecurity Operations Manager · Software Engineer · Architect · AI harness engineer",
+    "summary": "Agentic AI specialist focused on Cyber Security Operations and SOC automation. Hands-on, do-it-yourself manager, Software Engineer, and Architect. Highly self-driven, relentlessly curious, and passionate about delivering results at 10x speed. 18+ years of professional experience with a proven track record of delivering large-scale cybersecurity and big data projects. **Strong leadership**, coaching, and strategic communication skills. Recognized high performer, public keynote speaker, and self-taught learner with a high degree of **personal integrity** and a strong team-player mindset.\n**Tech stack**: harness Agentic AI engineering and automation solutions, enterprise-ready. Opencode, agent/subagent architectures, Anthropic and OpenAI models (also model-agnostic), secure identity-driven password-less architectures, Microsoft Azure cloud expert, large-scale integration architectures (Service Bus, Kafka, Azure Functions, Storage, Web), C#, SQL Server, PowerShell, Splunk, CrowdStrike, Microsoft Defender Suite, Microsoft Sentinel, and enterprise cybersecurity technologies.",
+    "metrics": [
+      {
+        "v": "18+",
+        "l": "professional years"
+      },
+      {
+        "v": "12+",
+        "l": "cybersecurity years"
+      },
+      {
+        "v": "3",
+        "l": "FTE reports"
+      },
+      {
+        "v": "2",
+        "l": "Expert-level certifications"
+      }
+    ]
+  },
+  "experience": [
+    {
+      "company": "SKF AB group",
+      "location": "The Hague, Netherlands",
+      "period": "Nov 2025 – present",
+      "roles": [
+        {
+          "title": "Head of Cyber Security Operations",
+          "period": "Nov 2025 – present",
+          "content": {
+            "description": "Head of SOC for IT and OT across ~20 factories. Leading Threat Detection Engineering, Incident Response, Threat Intelligence, Threat Hunting, Vulnerability Management, Offensive Security and Platform Engineering teams. Owner of SIEM, XDR, EDR, CSPM, CASB and OT security platforms.",
+            "points": [
+              "Shipped the [Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.",
+              "Built the harness: specialized agents/subagents, shipped the internal **Cyber MCP** with SSO auth.",
+              "Security engineering and operational delivery increased by ~5x."
+            ],
+            "overrides": {}
+          }
+        }
+      ]
+    },
+    {
+      "company": "Shell plc",
+      "location": "The Hague, Netherlands",
+      "period": "Nov 2016 – May 2025",
+      "roles": [
+        {
+          "title": "Lead Cyber Security Architect",
+          "period": "Apr 2023 – May 2025",
+          "content": {
+            "description": "Led SOC cyber architecture for group IRM and ERP, hands-on, focused on protecting 10+ cloud tenants, responsible for threat modeling, defining default security controls, contributing to vision and roadmap for global cyber team: SIEM, SOAR, EDR, Vulnerability, IAM, Cloud Posture.",
+            "points": [
+              "Delivered multiple six-figure savings through architecture changes."
+            ],
+            "overrides": {}
+          }
+        },
+        {
+          "title": "Lead Cyber Security Vulnerability Analyst",
+          "period": "Apr 2020 – Apr 2023",
+          "content": {
+            "description": "Led global SOC vulnerability management mission across discovery, analysis, prioritisation, remediation, mitigation and reporting.",
+            "points": [
+              "Automated end-to-end vulnerability management; reduced critical attack surface by 99%.",
+              "Built an in-house [**Shodan-like** search engine](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.confGO%202022%20Hilversum%20-%20Your%20META(DATA)%20is%20QUEEN%20for%20Cyber-Security%20Vulnerability%20Management.pdf) for IT/OT devices at scale.",
+              "Rapid7, ServiceNow SecOps VR, Splunk, CrowdStrike, Microsoft Defender for Endpoint, Wiz."
+            ],
+            "overrides": {}
+          }
+        },
+        {
+          "title": "Senior Cyber Security Data Scientist",
+          "period": "Jun 2019 – Apr 2020",
+          "content": {
+            "description": "Delivered ML, AI and NLP strategy for the global SOC Cyber Security team.",
+            "points": [
+              "Pitched first version of an AI chatbot for SOC Operations at Integrate 2019, London. Pre-ChatGPT moment!",
+              "C#, Bot Framework, Microsoft LUIS, API Management, Azure Logic Apps and Functions."
+            ],
+            "overrides": {}
+          }
+        },
+        {
+          "title": "Cyber Security Threat Hunter",
+          "period": "Nov 2016 – Jun 2019",
+          "content": {
+            "description": "Found unknown threats and weaknesses in security controls using SIEM detections, threat intelligence and incident log evidence.",
+            "points": [
+              "Group CIO awarded; found two threats that prevented ransomware opportunities.",
+              "Splunk, FireEye HX, CrowdStrike Falcon, Microsoft Defender for Endpoint"
+            ],
+            "overrides": {}
+          }
+        }
+      ]
+    },
+    {
+      "company": "SIA, Indra group",
+      "location": "Madrid, Spain",
+      "period": "Apr 2016 – Jul 2016",
+      "roles": [
+        {
+          "title": "Senior Cyber Security Consultant · Pentester / Red Team",
+          "period": "Apr 2016 – Jul 2016",
+          "content": {
+            "description": "Red-team and offensive security consultant for Active Directory, web applications and perimeter security.",
+            "points": [
+              "Obtained Domain Admin privileges in a large Spanish bank red-team assignment."
+            ],
+            "overrides": {}
+          }
+        }
+      ]
+    },
+    {
+      "company": "Shell plc",
+      "location": "Valencia, Venezuela",
+      "period": "Dec 2008 – Feb 2012",
+      "roles": [
+        {
+          "title": "Database Administrator / Software Developer",
+          "period": "Dec 2008 – Feb 2012",
+          "content": {
+            "description": "Architected, developed and distributed Microsoft SQL Server and C# applications.",
+            "points": [
+              "Built a C# integration app and BI solution rolled out across northern Latin America."
+            ],
+            "overrides": {}
+          }
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Cybersecurity Master's Degree",
+      "school": "Universidad Europea",
+      "location": "Madrid, Spain",
+      "period": "Oct 2013 – Jul 2014",
+      "detail": "1 year, published dissertation, grade 85.60/100.",
+      "url": "https://github.com/daniel0x00/r2dr2-udp-drdos-tool"
+    },
+    {
+      "degree": "Bachelor of Information Technology",
+      "school": "Universidad Tecnologica del Centro UNITEC",
+      "location": "Valencia, Venezuela",
+      "period": "Jan 2007 – Dec 2011",
+      "detail": "5 years, Cum Laude, #1 Honour Roll, grade 87.17/100.\nEU officially accredited."
+    }
+  ],
+  "skills": [
+    {
+      "k": "AI-first, agent-enabled SOCs",
+      "s": "Ability to create and maintain Enterprise-ready AI agents for SOC Operations to achieve ~5x delivery.",
+      "tags": [
+        "opencode",
+        "Claude Code",
+        "Codex",
+        "MCP"
+      ]
+    },
+    {
+      "k": "Offensive security",
+      "s": "Red team / Pentest skills.",
+      "tags": [
+        "Red team",
+        "C2",
+        "Reverse engineering"
+      ]
+    },
+    {
+      "k": "Windows & Linux security",
+      "s": "Hands-on ops on both OSes: EDR, forensics, IoC hunting; Bash/PowerShell automation from exploit validation at scale to SIEM telemetry pipelines for tens of thousands of servers.",
+      "tags": [
+        "EDR",
+        "Forensics",
+        "Logging"
+      ]
+    },
+    {
+      "k": "Programming & secure coding",
+      "s": "Senior dev background: C#, PowerShell, SQL Server, PostgreSQL, SPL, KQL. Now shipping most code through agentic pipelines with review gates, tests and Human-in-the-Loop.",
+      "tags": [
+        "C#",
+        "PowerShell",
+        "MSSQL",
+        "SPL/KQL"
+      ]
+    },
+    {
+      "k": "Threat modeling & detection",
+      "s": "STRIDE on critical systems and APIs; pragmatic risk assessments; intel TTPs translated to SPL/KQL detections and IR playbooks.",
+      "tags": [
+        "STRIDE",
+        "ATT&CK",
+        "Detection-as-code"
+      ]
+    },
+    {
+      "k": "Leadership & communication",
+      "s": "Leads FTEs, contractors, MSSPs and a fleet of AI agents; mentoring and comms up to CIO/CISO; public keynote speaker; yearly anonymous peer feedback.",
+      "tags": [
+        "C-level comms",
+        "MSP management",
+        "Coaching"
+      ]
+    },
+    {
+      "k": "Cloud expertise",
+      "s": "Azure Expert-certified (Solutions Architect + Cybersecurity Architect). Wiz rollout for multi-cloud CSPM across AWS, Alibaba, Azure China and Azure; hardened PaaS with monitoring and response automation.",
+      "tags": [
+        "Azure certified",
+        "CSPM",
+        "Cloud hardening"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Microsoft Certified: Azure Solutions Architect Expert",
+      "since": "holder since 2017 · active",
+      "url": "https://learn.microsoft.com/api/credentials/share/en-gb/daniel0x00/AC29E0E751C6D24D?sharingId=AE96336F33648BCE",
+      "verifyNote": "verifiable Microsoft credential link"
+    },
+    {
+      "name": "Microsoft Certified: Cybersecurity Architect Expert",
+      "since": "holder since 2022 · active",
+      "url": "https://learn.microsoft.com/api/credentials/share/en-gb/daniel0x00/6E4E954136076FE?sharingId=AE96336F33648BCE",
+      "verifyNote": "verifiable Microsoft credential link"
+    }
+  ],
+  "honours": [
+    {
+      "t": "[Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html)",
+      "d": "Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations."
+    },
+    {
+      "t": "Shell Group CIO Award winner, twice",
+      "d": "Recognized for detecting material cyber risk and preventing ransomware-like opportunities."
+    },
+    {
+      "t": "[Splunk .conf21 speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.conf21%20-%20SEC1075A%20-%20Effective%20and%20affordable%20Cyber-Security%20Vulnerability%20Management.pdf)",
+      "d": "Vulnerability Management at scale. Advanced level."
+    },
+    {
+      "t": "[Splunk .confGO Netherlands speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.confGO%202022%20Hilversum%20-%20Your%20META(DATA)%20is%20QUEEN%20for%20Cyber-Security%20Vulnerability%20Management.pdf)",
+      "d": "How to build an internal Shodan-like search engine. Advanced level."
+    },
+    {
+      "t": "[Published PowerShell packages and code](https://github.com/daniel0x00?tab=repositories)",
+      "d": "Infoblox Grid, Exchange permissions, Yahoo Finance, FireEyeHX and more."
+    }
+  ],
+  "contact": {
+    "email": "gourd-farrier.6p@icloud.com",
+    "linkedin": "https://www.linkedin.com/in/daferreira/",
+    "github": "https://github.com/daniel0x00",
+    "location": "The Hague, Netherlands",
+    "citizenship": "Spain / EU",
+    "languages": "English, Spanish",
+    "note": "For privacy reasons and to combat spam, the email shown is a disposable email address that changes over time. You can write there and I will receive it. Please do expect a response from my real email address ending in `@ferreira.fm`.",
+    "noteColor": "#e5c07b"
+  },
+  "compensation": {
+    "title": "Compensation analysis",
+    "description": "Lossdog.com analyzes professional worth and compensation from resume and career history.",
+    "url": "https://app.lossdog.com/share/profile-report/d2a26f68-00ec-40a2-8a42-f7d95d106201/",
+    "linkText": "View Daniel's total compensation analysis"
+  }
+};
+
+/* ============================== helpers ============================== */
+
+const $ = (s) => document.querySelector(s);
+const scrollEl = $("#scroll"), input = $("#cmd"), suggestEl = $("#suggest");
+const esc = (s) => String(s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+/* Config prose supports a deliberately small, escaped-first Markdown subset. */
+function safeHref(href) {
+  const value = String(href).trim();
+  if (!value || /[\x00-\x1f\s"'<>]/.test(value)) return null;
+  const external = /^https?:\/\/[^/?#]+/i.test(value) || /^mailto:.+/i.test(value);
+  const local = !/^[a-z][a-z0-9+.-]*:/i.test(value) && !value.startsWith("/") && !value.startsWith("\\");
+  return external || local ? { href: value, external } : null;
+}
+
+function md(s) {
+  const source = esc(s == null ? "" : s).replace(/\r\n?/g, "\n");
+  const protectedHTML = [];
+  const protect = (html) => `\x00${protectedHTML.push(html) - 1}\x00`;
+  const inline = (text) => text
+    .replace(/`([^`\n]+)`/g, (_, code) => protect(`<code>${code}</code>`))
+    .replace(/(\*\*|__)(?=\S)(.+?)(?<=\S)\1/g, "<strong>$2</strong>")
+    .replace(/(?<!\*)\*(?![\s*])(.+?)(?<!\s)\*(?!\*)/g, "<em>$1</em>")
+    .replace(/(?<!\w)_(?![\s_])(.+?)(?<!\s)_(?!\w)/g, "<em>$1</em>");
+  const linked = source.replace(/\[([^\]\n]+)\]\(([^()\s]*(?:\([^()\s]*\)[^()\s]*)*)\)/g, (_, label, href) => {
+    const safe = safeHref(href);
+    const renderedLabel = inline(label);
+    return safe
+      ? protect(`<a href="${safe.href}" target="_blank" rel="noopener noreferrer">${renderedLabel}</a>`)
+      : renderedLabel;
+  });
+  let rendered = inline(linked).replace(/\n/g, "<br>");
+  for (let i = 0; i < protectedHTML.length; i += 1) {
+    rendered = rendered.replace(/\x00(\d+)\x00/g, (_, index) => protectedHTML[Number(index)]);
+  }
+  return rendered;
+}
+/* <k>…</k> in config strings → highlighted keyword span; everything else is escaped */
+const kfmt = (s) => esc(s).replace(/&lt;k&gt;/g, '<span class="k">').replace(/&lt;\/k&gt;/g, "</span>");
+const scrollBottom = () => { scrollEl.scrollTop = scrollEl.scrollHeight; };
+
+function push(htmlStr, cls = "msg") {
+  const div = document.createElement("div");
+  div.className = cls;
+  div.innerHTML = htmlStr;
+  scrollEl.appendChild(div);
+  scrollBottom();
+  return div;
+}
+
+function panel(title, body, meta = "") {
+  return `<div class="panel"><div class="panel-title">${esc(title)}${meta ? `<span>${esc(meta)}</span>` : ""}</div><div class="panel-body">${body}</div></div>`;
+}
+
+/* ============================== renderers ============================== */
+
+function rHelp(cmd) {
+  const visible = COMMANDS.filter(c => !c.hidden);
+  const rows = visible
+    .map(c => `<div class="hrow"><span class="hcmd">${c.type === "link" ? `<a href="${esc(c.href)}" target="_blank" rel="noopener noreferrer">${esc(c.name)} ↗</a>` : `<button type="button" data-run="${esc(c.name)}">${esc(c.usage || c.name)}</button>`}</span><span class="hdesc">${esc(c.desc)}</span></div>`)
+    .join("");
+  return panel(cmd.panelTitle, `<div class="help-grid">${rows}</div>
+    <p class="desc" style="margin-top:10px">${kfmt(CONFIG.messages.helpTip)}</p>`, cmd.panelMeta || `${visible.length} commands`);
+}
+
+function rExperience(cmd) {
+  const body = CONFIG.experience.map(job => `
+    <div class="item">
+      <div class="row"><b>${esc(job.company)}</b><time>${esc(job.period)}</time></div>
+      <div class="loc">${esc(job.location)}</div>
+      ${job.roles.map(r => {
+        const content = resolveRoleContent(r, "tui");
+        return `
+        <div class="roleline">└ ${esc(r.title)} <time>· ${esc(r.period)}</time></div>
+        <p class="desc">${md(content.description)}</p>
+        <ul class="points">${content.points.map(p => `<li>${md(p)}</li>`).join("")}</ul>
+      `;
+      }).join("")}
+    </div>`).join("");
+  return panel(cmd.panelTitle, body, cmd.panelMeta);
+}
+
+function rEducation(cmd) {
+  const body = CONFIG.education.map(e => `
+    <div class="item">
+      <div class="row"><b>${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.degree)}</a>` : esc(e.degree)}</b><time>${esc(e.period)}</time></div>
+      <div class="loc">${esc(e.school)} · ${esc(e.location)}</div>
+      <p class="desc">${md(e.detail)}</p>
+    </div>`).join("");
+  return panel(cmd.panelTitle, body, cmd.panelMeta);
+}
+
+function rSkills(cmd) {
+  const body = CONFIG.skills.map((s, i) => `
+    <div class="item">
+      <div class="row"><b>${String(i + 1).padStart(2, "0")} · ${esc(s.k)}</b></div>
+      <p class="desc">${md(s.s)}</p>
+      <div class="chips">${s.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+    </div>`).join("");
+  return panel(cmd.panelTitle, body, cmd.panelMeta);
+}
+
+function rPortfolio(cmd) {
+  const metrics = `<div class="metric-strip">${CONFIG.profile.metrics.map(m => `<div><b>${esc(m.v)}</b><span>${esc(m.l)}</span></div>`).join("")}</div>`;
+  const honours = CONFIG.honours.map(h => `
+    <div class="item">
+      <div class="row"><b>${md(h.t)}</b></div>
+      <p class="desc">${md(h.d)}</p>
+    </div>`).join("");
+  return panel(cmd.panelTitle, `<p class="desc">${md(CONFIG.profile.summary)}</p>${metrics}${honours}`, cmd.panelMeta);
+}
+
+function rCompensation(cmd) {
+  const c = CONFIG.compensation;
+  const linkTarget = c.url && c.linkText ? safeHref(c.url) : null;
+  const link = linkTarget
+    ? `<p class="desc"><a href="${esc(linkTarget.href)}" target="_blank" rel="noopener noreferrer">${md(c.linkText)}</a></p>`
+    : "";
+  return panel(c.title || cmd.panelTitle, `<p class="desc">${md(c.description)}</p>${link}`, cmd.panelMeta);
+}
+
+function rCerts(cmd) {
+  const body = CONFIG.certifications.map(c => `
+    <div class="item">
+      <div class="row"><b><a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.name)}</a></b></div>
+      <div class="loc">${esc(c.since)}${c.verifyNote ? " · " + esc(c.verifyNote) : ""}</div>
+    </div>`).join("");
+  return panel(cmd.panelTitle, body, cmd.panelMeta);
+}
+
+function rContact(cmd) {
+  const c = CONFIG.contact;
+  const note = c.note
+    ? `<p class="contact-note" style="color:${esc(c.noteColor || "var(--yellow)")}">${md(c.note)}</p>`
+    : "";
+  return panel(cmd.panelTitle, `<dl class="kv">
+    <dt>email</dt><dd><a href="mailto:${esc(c.email)}" target="_blank" rel="noopener noreferrer">${esc(c.email)}</a></dd>
+    <dt>linkedin</dt><dd><a href="${esc(c.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(c.linkedin.replace("https://www.", ""))}</a></dd>
+    <dt>github</dt><dd><a href="${esc(c.github)}" target="_blank" rel="noopener noreferrer">${esc(c.github.replace("https://", ""))}</a></dd>
+    <dt>location</dt><dd>${esc(c.location)}</dd>
+    <dt>citizenship</dt><dd>${esc(c.citizenship)}</dd>
+    <dt>languages</dt><dd>${esc(c.languages)}</dd>
+  </dl>${note}`, cmd.panelMeta);
+}
+
+function rWhoami(cmd) {
+  return panel(cmd.panelTitle, `<div class="row"><b>${esc(CONFIG.profile.name)}</b></div>
+    <p class="desc">${md(CONFIG.profile.title)}</p>
+    <p class="desc">${md(CONFIG.profile.summary)}</p>`, cmd.panelMeta);
+}
+
+/* Target-specific role prose inherits every omitted field from shared content. */
+function resolveRoleContent(role, target) {
+  const shared = role.content || {};
+  const override = (shared.overrides && shared.overrides[target]) || {};
+  return {
+    description: override.description === undefined ? shared.description : override.description,
+    points: override.points === undefined ? shared.points : override.points
+  };
+}
+
+/* ============================== commands ============================== */
+
+const RENDERERS = {
+  help: rHelp, experience: rExperience, education: rEducation, skills: rSkills,
+  portfolio: rPortfolio, compensation: rCompensation, certifications: rCerts,
+  contact: rContact, whoami: rWhoami
+};
+
+const TUI_SECTIONS = new Set(CONFIG.outputs.tui.sections);
+const COMMAND_SECTION_REQUIREMENTS = Object.freeze({
+  experience: ["experience"], education: ["education"], skills: ["skills"],
+    compensation: ["compensation"], certifications: ["certifications"],
+  contact: ["contact"], whoami: ["profile"], portfolio: ["profile", "honours"]
+});
+
+function commandEnabled(command, sections = TUI_SECTIONS) {
+  return (COMMAND_SECTION_REQUIREMENTS[command.type] || []).every(section => sections.has(section));
+}
+
+function enabledCommands(commands, sections = TUI_SECTIONS) {
+  return commands.filter(command => commandEnabled(command, sections));
+}
+
+const COMMANDS = enabledCommands(CONFIG.commands)
+  .map(c => ({ ...c, run: RENDERERS[c.type] || null }));
+
+function findCommand(word) {
+  const w = word.toLowerCase();
+  return COMMANDS.find(c => c.name === w || (c.aliases || []).includes(w));
+}
+
+/* ============================== engine ============================== */
+
+const history = [];
+let historyIdx = -1;
+const SPINNER = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+
+function doClear() {
+  scrollEl.innerHTML = "";
+  push(`<span class="hint">${kfmt(CONFIG.messages.cleared)}</span>`);
+}
+
+async function exec(raw, opts = {}) {
+  const line = raw.trim();
+  if (!line) return;
+  if (!opts.silent) {
+    history.push(line);
+    historyIdx = history.length;
+  }
+  push(`<div class="echo">${esc(line)}</div>`);
+
+  const parts = (line.startsWith("/") ? line : "/" + line).split(/\s+/);
+  const word = parts[0], args = parts.slice(1);
+  const cmd = findCommand(word);
+
+  if (cmd && cmd.type === "clear") { doClear(); return; }
+
+  if (cmd && cmd.type === "theme") {
+    const want = THEMES.includes((args[0] || "").toLowerCase())
+      ? args[0].toLowerCase()
+      : (currentTheme() === "dark" ? "light" : "dark");
+    applyTheme(want);
+    push(`<div class="ok">◐ ${esc(CONFIG.theme.switchedText.replace("{theme}", want))}</div>`);
+    return;
+  }
+
+  if (cmd && cmd.type === "models") {
+    openModelModal();
+    return;
+  }
+
+  if (!cmd) {
+    const hints = CONFIG.messages.errorHintCmds
+      .filter(hint => findCommand(hint))
+      .map(hint => `<a href="#" data-run="${esc(hint)}">${esc(hint)}</a>`)
+      .join(" · ");
+    push(`<div class="err"><b>error:</b> ${esc(CONFIG.messages.unknownCommand)} <b>${esc(word)}</b>${hints ? ` — try ${hints}` : ""}.</div>`);
+    return;
+  }
+
+  if (cmd.type === "link") {
+    push(`<div class="ok">↗ ${esc(CONFIG.messages.openingLink)} <a href="${esc(cmd.href)}" target="_blank" rel="noopener noreferrer">${esc(cmd.href)}</a> …</div>`);
+    window.open(cmd.href, "_blank", "noopener");
+    return;
+  }
+
+  if (!opts.instant) {
+    const spin = push(`<span class="spin">⠋ running ${esc(cmd.name)}…</span>`);
+    let i = 0;
+    const t = setInterval(() => { spin.firstChild.textContent = `${SPINNER[i++ % SPINNER.length]} running ${cmd.name}…`; }, 60);
+    await new Promise(r => setTimeout(r, 260 + Math.random() * 240));
+    clearInterval(t);
+    spin.remove();
+  }
+  push(cmd.run(cmd));
+}
+
+/* ============================== autocomplete ============================== */
+
+let sugItems = [], sugIdx = 0;
+
+function renderSuggest() {
+  if (!sugItems.length) { suggestEl.classList.remove("open"); return; }
+  suggestEl.innerHTML = sugItems.map((c, i) =>
+    `<div class="sug${i === sugIdx ? " sel" : ""}" data-idx="${i}" role="option"><span class="sc">${esc(c.name)}</span><span class="sd">${esc(c.desc)}</span></div>`
+  ).join("");
+  suggestEl.classList.add("open");
+}
+
+function updateSuggest() {
+  const v = input.value.trim().toLowerCase();
+  if (!v.startsWith("/") || v.includes(" ")) { sugItems = []; renderSuggest(); return; }
+  sugItems = COMMANDS.filter(c => !c.hidden && (c.name.startsWith(v) || (c.aliases || []).some(a => a.startsWith(v))));
+  sugIdx = Math.min(sugIdx, Math.max(0, sugItems.length - 1));
+  renderSuggest();
+}
+
+function acceptSuggestion() {
+  if (!sugItems.length) return false;
+  input.value = sugItems[sugIdx].name;
+  sugItems = [];
+  renderSuggest();
+  return true;
+}
+
+/* ============================== events ============================== */
+
+input.addEventListener("input", () => { sugIdx = 0; updateSuggest(); });
+
+input.addEventListener("keydown", (e) => {
+  if (modelOverlay.classList.contains("open")) return;
+  const open = suggestEl.classList.contains("open");
+  if (e.key === "Enter") {
+    e.preventDefault();
+    if (open && sugItems.length && input.value.trim() !== sugItems[sugIdx].name) { acceptSuggestion(); return; }
+    const v = input.value;
+    input.value = "";
+    sugItems = []; renderSuggest();
+    exec(v);
+  } else if (e.key === "Tab") {
+    e.preventDefault();
+    acceptSuggestion();
+  } else if (e.key === "ArrowUp") {
+    if (open) { e.preventDefault(); sugIdx = (sugIdx - 1 + sugItems.length) % sugItems.length; renderSuggest(); }
+    else if (history.length) { e.preventDefault(); historyIdx = Math.max(0, historyIdx - 1); input.value = history[historyIdx] || ""; }
+  } else if (e.key === "ArrowDown") {
+    if (open) { e.preventDefault(); sugIdx = (sugIdx + 1) % sugItems.length; renderSuggest(); }
+    else if (history.length) {
+      e.preventDefault();
+      historyIdx = Math.min(history.length, historyIdx + 1);
+      input.value = historyIdx >= history.length ? "" : history[historyIdx];
+    }
+  } else if (e.key === "Escape") {
+    sugItems = []; renderSuggest();
+  }
+});
+
+suggestEl.addEventListener("mousedown", (e) => {
+  const el = e.target.closest(".sug");
+  if (!el) return;
+  e.preventDefault();
+  sugIdx = +el.dataset.idx;
+  acceptSuggestion();
+  input.focus();
+});
+
+scrollEl.addEventListener("click", (e) => {
+  const runEl = e.target.closest("[data-run]");
+  if (runEl) { e.preventDefault(); exec(runEl.dataset.run); }
+});
+
+$("#term").addEventListener("click", (e) => {
+  if (e.target.closest("a, button, .panel-body, .suggest")) return;
+  if (window.getSelection().toString()) return;
+  input.focus();
+});
+
+/* ============================== theme ============================== */
+
+const THEMES = ["dark", "light"];
+
+function currentTheme() {
+  return document.documentElement.dataset.theme || CONFIG.theme.default;
+}
+
+function updateThemeLabel() {
+  const tt = $("#themeToggle");
+  if (tt) tt.textContent = `${currentTheme() === "dark" ? "☾" : "☀"} ${currentTheme()}`;
+}
+
+function applyTheme(t, persist = true) {
+  if (!THEMES.includes(t)) t = CONFIG.theme.default;
+  document.documentElement.dataset.theme = t;
+  if (persist) { try { localStorage.setItem("od-theme", t); } catch (e) { /* private mode */ } }
+  updateThemeLabel();
+}
+
+function initTheme() {
+  let saved = null;
+  try { saved = localStorage.getItem("od-theme"); } catch (e) { /* private mode */ }
+  document.documentElement.dataset.theme = THEMES.includes(saved) ? saved : CONFIG.theme.default;
+}
+initTheme();
+
+/* ============================== chrome (sidebar / composer / statusbar) ============================== */
+
+const sidebar = $("#sidebar"), overlay = $("#overlay"), menuBtn = $("#menuBtn");
+
+function renderChrome() {
+  const sb = CONFIG.sidebar;
+  $("#brand").innerHTML = `<img src="${esc(sb.avatar)}" alt="${esc(CONFIG.profile.name)}">
+    <div><div class="word"><i>${esc(sb.brandPrefix)}</i><b>${esc(sb.brandName)}</b></div><small>${esc(sb.tagline)}</small></div>`;
+  $("#sideLabel").textContent = sb.commandsLabel;
+  $("#sideFoot").innerHTML = sb.footer.map(f =>
+    f.href
+      ? `<a href="${esc(f.href)}" target="_blank" rel="noopener noreferrer">${esc(f.text)}</a>`
+      : `<span${f.credit ? ' class="credit"' : ""}>${esc(f.text)}</span>`
+  ).join("");
+  $("#cmdlist").innerHTML = COMMANDS.filter(c => !c.hidden).map(c =>
+    c.type === "link"
+      ? `<a class="linkcmd" href="${esc(c.href)}" target="_blank" rel="noopener noreferrer" data-cmd="${esc(c.name)}"><span class="c">${esc(c.name)}&nbsp;↗</span><span class="d">${esc(c.desc)}</span></a>`
+      : `<button data-cmd="${esc(c.name)}"><span class="c">${esc(c.name)}</span><span class="d">${esc(c.desc)}</span></button>`
+  ).join("");
+  input.placeholder = CONFIG.composer.placeholder;
+  $("#keysLeft").innerHTML = CONFIG.composer.keys
+    .map(([k, l]) => `<span class="k">${esc(k)}</span> ${esc(l)}`).join("&nbsp;&nbsp;");
+  $("#keysRight").textContent = CONFIG.composer.note;
+  const st = CONFIG.statusbar;
+  $("#statusLhs").innerHTML = `<span class="tag">${esc(st.tag)}</span><span>${esc(st.path)}</span>`;
+  $("#statusRhs").innerHTML = `<span class="theme-toggle" id="themeToggle" role="button" tabindex="0" title="toggle theme (/theme)"></span><span class="dot">●</span><span>${esc(st.model)}</span><span>${esc(st.context)}</span>`;
+  $("#themeToggle").addEventListener("click", () => exec("/theme"));
+  $("#themeToggle").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); exec("/theme"); } });
+  updateThemeLabel();
+  $("#modalTitle").textContent = CONFIG.modal.title;
+  $("#modalHint").textContent = CONFIG.modal.hint;
+  $("#modalNote").textContent = CONFIG.modal.note;
+}
+
+$("#cmdlist").addEventListener("click", (e) => {
+  const link = e.target.closest("a.linkcmd");
+  if (link) { closeSidebar(); return; } /* real link: let the browser handle it */
+  const btn = e.target.closest("button[data-cmd]");
+  if (!btn) return;
+  closeSidebar();
+  exec(btn.dataset.cmd);
+  input.focus();
+});
+function closeSidebar() { sidebar.classList.remove("open"); overlay.classList.remove("show"); }
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show", sidebar.classList.contains("open"));
+});
+overlay.addEventListener("click", closeSidebar);
+
+/* ============================== ctrl+p easter egg ============================== */
+
+const MODELS = CONFIG.modal.models;
+const modelOverlay = $("#modelOverlay"), modelList = $("#modelList");
+let modelIdx = 0;
+
+function renderModels() {
+  modelList.innerHTML = MODELS.map((m, i) =>
+    `<button class="model-row${m.active ? " active" : ""}${i === modelIdx ? " sel" : ""}" data-idx="${i}">
+       <span class="mid">${esc(m.id)}</span><span class="mnote">${esc(m.note)}</span>
+     </button>`).join("");
+}
+
+function openModelModal() {
+  modelIdx = 0;
+  renderModels();
+  modelOverlay.classList.add("open");
+}
+function closeModelModal() {
+  modelOverlay.classList.remove("open");
+  input.focus();
+}
+
+function pickModel(i) {
+  const m = MODELS[i];
+  const active = MODELS.find(x => x.active) || m;
+  const fmt = (s) => esc(s.replace("{model}", m.id).replace("{active}", active.id));
+  closeModelModal();
+  if (m.active) {
+    push(`<div class="ok">✓ ${fmt(CONFIG.modal.acceptText)}</div>`);
+  } else {
+    const link = CONFIG.modal.rejectLinkCmd;
+    const enabledLink = findCommand(link);
+    push(`<div class="err"><b>error:</b> ${fmt(CONFIG.modal.rejectText)}${enabledLink ? ` <a href="#" data-run="${esc(link)}">${esc(link)}</a>` : ""}</div>`);
+  }
+}
+
+window.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && e.key.toLowerCase() === "p") {
+    e.preventDefault();
+    modelOverlay.classList.contains("open") ? closeModelModal() : openModelModal();
+    return;
+  }
+  if (!modelOverlay.classList.contains("open")) return;
+  if (e.key === "Escape") { e.preventDefault(); closeModelModal(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); modelIdx = (modelIdx + 1) % MODELS.length; renderModels(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); modelIdx = (modelIdx - 1 + MODELS.length) % MODELS.length; renderModels(); }
+  else if (e.key === "Enter") { e.preventDefault(); pickModel(modelIdx); }
+});
+modelList.addEventListener("click", (e) => {
+  const row = e.target.closest(".model-row");
+  if (row) pickModel(+row.dataset.idx);
+});
+modelOverlay.addEventListener("click", (e) => { if (e.target === modelOverlay) closeModelModal(); });
+
+/* ============================== boot ============================== */
+
+function boot() {
+  renderChrome();
+  const banner = CONFIG.banner.dim.map((l, i) => `<span class="o">${esc(l)}</span>${esc(CONFIG.banner.accent[i] || "")}`).join("\n");
+  push(`<div class="banner"><pre>${banner}</pre></div>`, "msg banner-wrap");
+  if (TUI_SECTIONS.has("profile")) {
+    push(`<div class="intro"><b>${esc(CONFIG.profile.name)}</b> ${esc(CONFIG.boot.introSuffix)}<br>
+      <span class="role">${esc(CONFIG.profile.title)}</span></div>`);
+  }
+  push(`<div class="hint">${CONFIG.boot.hints.map(kfmt).join("<br>")}</div>`);
+  input.focus();
+}
+boot();
+
+/* ============================== autotest (#autotest) ============================== */
+
+async function autotest() {
+  const results = [];
+  const check = (name, cond) => results.push([name, !!cond]);
+  const lastHTML = () => scrollEl.lastElementChild ? scrollEl.lastElementChild.innerHTML : "";
+
+  const cases = [
+    ["/help", "available commands", "/certifications"],
+    ["/experience", "SKF AB group", "Head of Cyber Security Operations"],
+    ["/experience", CONFIG.experience[0].roles[0].content.points[1].slice(0, 18), 'href="https://cv.ferreira.fm/portfolio-agentic-SOC.html"'],
+    ["/exp", "Shell plc", "Lead Cyber Security Architect"],
+    ["/education", CONFIG.education[0].school, CONFIG.education[1].detail.slice(0, 8)],
+    ["/skills", "AI-first, agent-enabled SOC", "opencode"],
+    ["/compensation", CONFIG.compensation.title, CONFIG.compensation.description.slice(0, 24)],
+    ["/portfolio", "CIO Award", CONFIG.profile.metrics.at(-1).v],
+    ["/portfolio", CONFIG.honours[0].t.replace(/\[|\]\([^)]*\)/g, ""), 'href="https://cv.ferreira.fm/portfolio-agentic-SOC.html"'],
+    ["/certifications", "Azure Solutions Architect Expert", "Cybersecurity Architect Expert"],
+    ["/certs", "Azure Solutions Architect Expert", "learn.microsoft.com"],
+    ["/contact", CONFIG.contact.email, "The Hague"],
+    ["/whoami", CONFIG.profile.name, CONFIG.profile.title]
+  ];
+  for (const [cmd, m1, m2] of cases) {
+    await exec(cmd, { instant: true, silent: true });
+    const h = lastHTML();
+    check(`${cmd} shows "${m1}"`, h.includes(m1));
+    check(`${cmd} shows "${m2}"`, h.includes(m2));
+  }
+  const reducedSections = new Set(["profile"]);
+  const reducedCommands = enabledCommands(CONFIG.commands, reducedSections).map(command => command.name);
+  check("reduced TUI selection omits unavailable feature commands", !reducedCommands.includes("/experience")
+    && !reducedCommands.includes("/contact"));
+  check("/whoami requires the profile section", reducedCommands.includes("/whoami")
+    && !commandEnabled({ type: "whoami" }, new Set()));
+  check("/portfolio requires both profile and honours", !reducedCommands.includes("/portfolio")
+    && commandEnabled({ type: "portfolio" }, new Set(["profile", "honours"])));
+  check("configured TUI command list includes only selected feature content", COMMANDS.every(command => commandEnabled(command)));
+  check("runtime output schema exposes the configured TUI sections", Array.isArray(CONFIG.outputs.tui.sections)
+    && TUI_SECTIONS.size === new Set(CONFIG.outputs.tui.sections).size
+    && ["tui", "pdf", "md"].every(output => output in CONFIG.outputs)
+    && Object.keys(CONFIG.outputs).length === 3
+    && !("exports" in CONFIG) && !("cv" in CONFIG));
+  const markdownHTML = md("**bold**\r\n[safe link](https://example.test/path) [unsafe link](javascript:alert(1))");
+  check("Markdown renders bold and normalized newlines", markdownHTML.includes("<strong>bold</strong><br>"));
+  check("Markdown external links open safely in a new tab", markdownHTML.includes('href="https://example.test/path" target="_blank" rel="noopener noreferrer"'));
+  check("Markdown leaves executable-scheme links inert", !markdownHTML.includes('href="javascript:') && markdownHTML.includes("unsafe link"));
+  const richLabelHTML = md("[**bold** `code` and *emphasis*](https://example.test/rich)");
+  check("Markdown formats link labels without nested anchors", richLabelHTML.includes('<a href="https://example.test/rich" target="_blank" rel="noopener noreferrer"><strong>bold</strong> <code>code</code> and <em>emphasis</em></a>')
+    && (richLabelHTML.match(/<a\b/g) || []).length === 1);
+  const parenthesizedURL = md("[document](https://example.test/file%20name%20META(DATA).pdf)");
+  check("Markdown preserves encoded URLs containing parentheses", parenthesizedURL.includes('href="https://example.test/file%20name%20META(DATA).pdf"'));
+  const configRole = CONFIG.experience[0].roles[0];
+  const temporaryRole = {
+    ...configRole,
+    content: {
+      ...configRole.content,
+      overrides: {
+        ...configRole.content.overrides,
+        autotest: { description: "temporary **target**", points: ["temporary point"] }
+      }
+    }
+  };
+  const temporaryContent = resolveRoleContent(temporaryRole, "autotest");
+  check("role target resolver uses a temporary config-derived override", temporaryContent.description === "temporary **target**" && temporaryContent.points[0] === "temporary point");
+  check("role target resolver falls back per field to shared content", resolveRoleContent({
+    ...configRole,
+    content: { ...configRole.content, overrides: { autotest: { description: "override only" } } }
+  }, "autotest").points === configRole.content.points);
+  await exec("/compensation", { instant: true, silent: true });
+  const compensationHTML = lastHTML();
+  check("/compensation renders the configured Markdown description", compensationHTML.includes(md(CONFIG.compensation.description)));
+  check("/compensation renders the configured safe link", (() => {
+    const link = scrollEl.lastElementChild.querySelector("a");
+    return !!link && link.getAttribute("href") === CONFIG.compensation.url
+      && link.textContent === CONFIG.compensation.linkText
+       && link.target === "_blank" && link.rel.includes("noopener") && link.rel.includes("noreferrer");
+  })());
+  const compensationCommand = COMMANDS.find(c => c.type === "compensation");
+  const configuredCompensation = CONFIG.compensation;
+  CONFIG.compensation = { ...configuredCompensation, url: "" };
+  const noUrlHTML = rCompensation(compensationCommand);
+  CONFIG.compensation = { ...configuredCompensation, linkText: "" };
+  const noLinkHTML = rCompensation(compensationCommand);
+  CONFIG.compensation = {
+    title: "reduced schema",
+    description: "a **Markdown** description",
+    url: "https://example.test/compensation",
+    linkText: "a *Markdown* link"
+  };
+  const reducedSchemaHTML = rCompensation(compensationCommand);
+  CONFIG.compensation = configuredCompensation;
+  check("/compensation omits the link when URL is absent", !noUrlHTML.includes("<a "));
+  check("/compensation omits the link when link text is absent", !noLinkHTML.includes("<a "));
+  check("/compensation supports the reduced schema without provider fields", reducedSchemaHTML.includes("<strong>Markdown</strong>")
+    && reducedSchemaHTML.includes("<em>Markdown</em>") && reducedSchemaHTML.includes('href="https://example.test/compensation"'));
+  await exec("/contact", { instant: true, silent: true });
+  const contactHTML = lastHTML();
+  check("/contact omits optional phone row", !contactHTML.includes("<dt>phone</dt>") && !contactHTML.includes("tel:"));
+  const contactNote = scrollEl.lastElementChild.querySelector(".contact-note");
+  check("/contact renders configured note", !!contactNote && contactNote.innerHTML === md(CONFIG.contact.note));
+  check("/contact note uses configured color", !!contactNote
+    && contactNote.getAttribute("style") === `color:${CONFIG.contact.noteColor}`);
+
+  /* /cv behaves as a link/redirect */
+  const opened = [];
+  const realOpen = window.open;
+  window.open = (u) => { opened.push(String(u)); return null; };
+  await exec("/cv", { instant: true, silent: true });
+  window.open = realOpen;
+  check("/cv opens the pdf (redirect)", opened.length === 1 && opened[0].toLowerCase().endsWith(".pdf"));
+  check("/cv echoes a safely new-window PDF link", (() => {
+    const link = scrollEl.lastElementChild.querySelector('a[href$=".pdf"]');
+    return !!link && link.target === "_blank" && link.rel.includes("noopener") && link.rel.includes("noreferrer");
+  })());
+  const cvSide = document.querySelector('#cmdlist a.linkcmd[data-cmd="/cv"]');
+  check("sidebar renders /cv as a safely new-window link", !!cvSide && cvSide.getAttribute("href").endsWith(".pdf")
+    && cvSide.target === "_blank" && cvSide.rel.includes("noopener") && cvSide.rel.includes("noreferrer"));
+  check("/help renders /cv as configured link", (() => {
+    const cvCommand = COMMANDS.find(command => command.name === "/cv");
+    return !!cvCommand && rHelp(COMMANDS[0]).includes(`href="${esc(cvCommand.href)}"`);
+  })());
+  check("/help renders executable command buttons", (() => {
+    const help = rHelp(COMMANDS.find(command => command.name === "/help"));
+    return help.includes('data-run="/models"') && help.includes("<button") && !help.includes('data-run="/cv"');
+  })());
+  await exec("/models", { instant: true, silent: true });
+  check("/models opens the model selection modal", modelOverlay.classList.contains("open")
+    && modelList.querySelectorAll(".model-row").length === MODELS.length);
+  closeModelModal();
+
+  await exec("/doesnotexist", { instant: true, silent: true });
+  const errH = lastHTML();
+  check("unknown cmd shows error", errH.includes(CONFIG.messages.unknownCommand));
+  check("error hints /help + /experience", errH.includes("/help") && errH.includes("/experience"));
+
+  input.value = "/ex";
+  input.dispatchEvent(new Event("input"));
+  check("autocomplete opens for /ex", suggestEl.classList.contains("open") && suggestEl.textContent.includes("/experience"));
+  input.value = ""; input.dispatchEvent(new Event("input"));
+
+  await exec("/clear", { instant: true, silent: true });
+  check("/clear empties terminal", scrollEl.children.length <= 1);
+
+  /* config-driven chrome */
+  check("brand rendered from config", $("#brand").textContent.includes(CONFIG.sidebar.brandName));
+  check("statusbar rendered from config", $("#statusRhs").textContent.includes(CONFIG.statusbar.model));
+  check("side footer rendered from config", $("#sideFoot").textContent.includes(CONFIG.sidebar.footer[0].text));
+  check("placeholder from config", input.placeholder === CONFIG.composer.placeholder);
+  check("keys bar from config", $("#keysLeft").textContent.includes(CONFIG.composer.keys[0][0]));
+  check("page title from config", document.title === CONFIG.meta.title);
+
+  /* ctrl+p easter egg */
+  window.dispatchEvent(new KeyboardEvent("keydown", { key: "p", ctrlKey: true, cancelable: true, bubbles: true }));
+  check("ctrl+p opens model modal", modelOverlay.classList.contains("open"));
+  check("modal note from config", $("#modalNote").textContent === CONFIG.modal.note);
+  check("modal lists active model from config", modelList.querySelector(".model-row.active .mid").textContent === MODELS.find(m => m.active).id);
+  window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", cancelable: true, bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", cancelable: true, bubbles: true }));
+  check("switching model is rejected with joke", lastHTML().includes("downgrade detected"));
+  check("modal closed after selection", !modelOverlay.classList.contains("open"));
+  window.dispatchEvent(new KeyboardEvent("keydown", { key: "p", ctrlKey: true, cancelable: true, bubbles: true }));
+  window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", cancelable: true, bubbles: true }));
+  check("esc closes modal", !modelOverlay.classList.contains("open"));
+
+  /* theme */
+  try { localStorage.removeItem("od-theme"); } catch (e) {}
+  initTheme();
+  updateThemeLabel();
+  check("default theme from config", document.documentElement.dataset.theme === CONFIG.theme.default);
+  check("statusbar theme toggle exists", !!$("#themeToggle"));
+  const bgBefore = getComputedStyle(document.body).backgroundColor;
+  await exec("/theme", { instant: true, silent: true });
+  const flipped = document.documentElement.dataset.theme;
+  check("/theme toggles theme", flipped !== CONFIG.theme.default && THEMES.includes(flipped));
+  check("theme switch message shown", lastHTML().includes(flipped));
+  check("theme persisted to localStorage", (() => { try { return localStorage.getItem("od-theme") === flipped; } catch (e) { return true; } })());
+  check("palette actually changes colors", getComputedStyle(document.body).backgroundColor !== bgBefore);
+  await exec("/theme " + CONFIG.theme.default, { instant: true, silent: true });
+  check("/theme <name> sets explicit theme", document.documentElement.dataset.theme === CONFIG.theme.default);
+  $("#themeToggle").click();
+  check("statusbar click toggles theme", document.documentElement.dataset.theme !== CONFIG.theme.default);
+  check("toggle label updates", $("#themeToggle").textContent.includes(document.documentElement.dataset.theme));
+  applyTheme(CONFIG.theme.default, false);
+  try { localStorage.removeItem("od-theme"); } catch (e) {}
+
+  /* layout: only console scrolls */
+  const termCS = getComputedStyle(document.querySelector(".term"));
+  check("term clips overflow (sidebar fixed)", termCS.overflow === "hidden" || termCS.overflowY === "hidden");
+  check("console scroll area is scrollable", getComputedStyle(scrollEl).overflowY === "auto");
+  check("base font >= 17.5px", parseFloat(getComputedStyle(document.body).fontSize) >= 17.5);
+
+  const passed = results.filter(r => r[1]).length;
+  const failed = results.filter(r => !r[1]).map(r => r[0]);
+  document.title = (failed.length ? "TESTS FAIL " : "TESTS PASS ") + `${passed}/${results.length}` + (failed.length ? " | " + failed.join("; ") : "");
+  push(panel("autotest results", `<p class="desc ${failed.length ? "err" : "ok"}">${passed}/${results.length} assertions passed${failed.length ? " — failed: " + esc(failed.join(", ")) : ""}</p>`), "msg");
+}
+
+if (location.hash === "#autotest") autotest();
+</script>
+</body>
+</html>

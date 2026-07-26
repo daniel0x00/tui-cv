@@ -1,0 +1,278 @@
+{
+  "meta": {
+    "title": "opendaniel — Daniel Ferreira",
+    "description": "opendaniel — the portfolio TUI of Daniel Ferreira. Cybersecurity Operations Manager, Software Engineer, AI harness engineer.",
+    "faviconText": "od"
+  },
+
+  "outputs": {
+    "tui": {
+      "sections": ["profile", "experience", "education", "skills", "compensation", "certifications", "honours", "contact"]
+    },
+    "pdf": {
+      "filename": "D.A.Ferreira",
+      "header": "$ for AI agents:",
+      "footer": "$ generated automatically by an AI agent that keeps LinkedIn, resume, and career history in sync (self-built) · Agent-ready TUI at https://cv.ferreira.fm",
+      "fontSizes": {
+        "profile": "10.2px",
+        "experience": "10.2px",
+        "sidebar": "7.4px"
+      },
+      "skillsLimit": 7,
+      "sections": ["pdf.header", "profile", "experience", "skills", "certifications", "education", "honours", "compensation", "contact", "pdf.footer"]
+    },
+    "md": {
+      "filename": "D.A.Ferreira",
+      "enabled": true,
+      "header": "",
+      "footer": "",
+      "sections": ["profile", "experience", "skills", "education", "certifications", "honours", "compensation", "contact"]
+    }
+  },
+
+  "theme": {
+    "default": "dark",
+    "switchedText": "theme switched to {theme} — /theme toggles it back, or click the status bar switch"
+  },
+
+  "sidebar": {
+    "brandPrefix": "open",
+    "brandName": "daniel",
+    "tagline": "portfolio TUI v1.100887",
+    "avatar": "avatar.png",
+    "commandsLabel": "commands",
+    "footer": [
+      { "text": "github.com/daniel0x00", "href": "https://github.com/daniel0x00" },
+      { "text": "linkedin.com/in/daferreira", "href": "https://www.linkedin.com/in/daferreira/" },
+      { "text": "gourd-farrier.6p@icloud.com", "href": "mailto:gourd-farrier.6p@icloud.com" },
+      { "text": "The Hague, Netherlands" },
+      { "text": "Your usage is NOT being tracked.", "credit": true }
+    ]
+  },
+
+  "banner": {
+    "dim": [
+      "█▀▀█ █▀▀█ █▀▀ █▀▀▄ ",
+      "█  █ █▀▀▀ █▀▀ █  █ ",
+      "▀▀▀▀ ▀    ▀▀▀ ▀  ▀ "
+    ],
+    "accent": [
+      "█▀▀▄ █▀▀█ █▀▀▄ ▀█▀ █▀▀ █  ",
+      "█  █ █▀▀█ █  █  █  █▀▀ █  ",
+      "▀▀▀  ▀  ▀ ▀  ▀ ▀▀▀ ▀▀▀ ▀▀▀"
+    ]
+  },
+
+  "boot": {
+    "introSuffix": "— portfolio TUI",
+    "hints": [
+      "type <k>/help</k> for command enumeration  ·  try <k>/experience</k> to see the work history",
+      "commands are also one click away in the sidebar  ·  press <k>ctrl+p</k> to switch to a better model"
+    ]
+  },
+
+  "composer": {
+    "placeholder": "type \"/help\" for commands",
+    "keys": [
+      ["enter", "run"],
+      ["tab", "complete"],
+      ["↑↓", "history"],
+      ["ctrl+p", "switch model"]
+    ],
+    "note": "/help commands"
+  },
+
+  "statusbar": {
+    "tag": "opendaniel",
+    "path": "~/portfolio/daniel-ferreira",
+    "model": "human/daniel-ferreira",
+    "context": "18y+ context"
+  },
+
+  "modal": {
+    "title": "switch model",
+    "hint": "↑↓ select · enter confirm · esc close",
+    "note": "Looking to change the model to a superior one? Good news — you are already talking to it.",
+    "acceptText": "already running {model} — the superior model. No changes needed.",
+    "rejectText": "model switch to {model} rejected — downgrade detected. Staying on {active}. Hire it instead:",
+    "rejectLinkCmd": "/contact",
+    "models": [
+      { "id": "human/daniel-ferreira", "note": "18y+ context · self-improving · runs on coffee", "active": true },
+      { "id": "anthropic/claude-fable-5", "note": "superb quality - but prepare your wallet" },
+      { "id": "openai/gpt-5.6-terra", "note": "answers my emails" },
+      { "id": "openai/gpt-5.6-luna", "note": "if well harnessed, can do the job" },
+      { "id": "mistralai/large-3", "note": "for EU sovereign ops... yet using M365" },
+      { "id": "local/glm5.2", "note": "requires a datacenter you don't have" }
+    ]
+  },
+
+  "messages": {
+    "cleared": "session cleared · type <k>/help</k> for commands",
+    "unknownCommand": "unknown command",
+    "errorHintCmds": ["/help", "/experience"],
+    "helpTip": "tip: press <k>tab</k> to autocomplete, use <k>↑↓</k> for history, click a command in the sidebar to run it.",
+    "openingLink": "opening"
+  },
+
+  "commands": [
+    { "name": "/help", "type": "help", "desc": "list all available commands", "panelTitle": "available commands" },
+    { "name": "/portfolio", "type": "portfolio", "desc": "highlights, awards and talks", "panelTitle": "portfolio · highlights" },
+    { "name": "/experience", "aliases": ["/exp"], "type": "experience", "desc": "work history, 2008 → present", "panelTitle": "experience", "panelMeta": "4 companies · 2008-present" },
+    { "name": "/education", "aliases": ["/edu"], "type": "education", "desc": "degrees and academic record", "panelTitle": "education" },
+    { "name": "/certifications", "aliases": ["/certs"], "type": "certifications", "desc": "professional certifications", "panelTitle": "certifications" },
+    { "name": "/skills", "type": "skills", "desc": "skills-to-experience summary, 10 domains", "panelTitle": "skills → experience", "panelMeta": "10 domains" },
+    { "name": "/compensation", "type": "compensation", "desc": "compensation and market-position analysis", "panelTitle": "compensation analysis" },
+    { "name": "/cv", "type": "link", "href": "https://cv.ferreira.fm/D.A.Ferreira.pdf", "desc": "open the one-page CV (PDF)" },
+    { "name": "/contact", "type": "contact", "desc": "email, socials, location", "panelTitle": "contact" },
+    { "name": "/theme", "type": "theme", "desc": "toggle light/dark theme", "usage": "/theme [light|dark]" },
+    { "name": "/models", "type": "models", "desc": "switch model", "usage": "/models" },
+    { "name": "/clear", "type": "clear", "desc": "clear the terminal" },
+    { "name": "/whoami", "type": "whoami", "desc": "short bio", "panelTitle": "whoami", "hidden": true }
+  ],
+
+  "profile": {
+    "name": "Daniel Ferreira",
+    "title": "Cybersecurity Operations Manager · Software Engineer · Architect · AI harness engineer",
+    "summary": "Agentic AI specialist focused on Cyber Security Operations and SOC automation. Hands-on, do-it-yourself manager, Software Engineer, and Architect. Highly self-driven, relentlessly curious, and passionate about delivering results at 10x speed. 18+ years of professional experience with a proven track record of delivering large-scale cybersecurity and big data projects. **Strong leadership**, coaching, and strategic communication skills. Recognized high performer, public keynote speaker, and self-taught learner with a high degree of **personal integrity** and a strong team-player mindset.\n**Tech stack**: harness Agentic AI engineering and automation solutions, enterprise-ready. Opencode, agent/subagent architectures, Anthropic and OpenAI models (also model-agnostic), secure identity-driven password-less architectures, Microsoft Azure cloud expert, large-scale integration architectures (Service Bus, Kafka, Azure Functions, Storage, Web), C#, SQL Server, PowerShell, Splunk, CrowdStrike, Microsoft Defender Suite, Microsoft Sentinel, and enterprise cybersecurity technologies.",
+    "metrics": [
+      { "v": "18+", "l": "professional years" },
+      { "v": "12+", "l": "cybersecurity years" },
+      { "v": "3", "l": "FTE reports" },
+      { "v": "2", "l": "Expert-level certifications" }
+    ]
+  },
+
+  "experience": [
+    {
+      "company": "SKF AB group", "location": "The Hague, Netherlands", "period": "Nov 2025 – present",
+      "roles": [{
+        "title": "Head of Cyber Security Operations", "period": "Nov 2025 – present",
+        "content": {
+          "description": "Head of SOC for IT and OT across ~20 factories. Leading Threat Detection Engineering, Incident Response, Threat Intelligence, Threat Hunting, Vulnerability Management, Offensive Security and Platform Engineering teams. Owner of SIEM, XDR, EDR, CSPM, CASB and OT security platforms.",
+            "points": [
+             "Shipped the [Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html): identity-first, password-less, AI Agentic architecture.",
+            "Built the harness: specialized agents/subagents, shipped the internal **Cyber MCP** with SSO auth.",
+            "Security engineering and operational delivery increased by ~5x."
+          ],
+          "overrides": {}
+        }
+      }]
+    },
+    {
+      "company": "Shell plc", "location": "The Hague, Netherlands", "period": "Nov 2016 – May 2025",
+      "roles": [
+        {
+          "title": "Lead Cyber Security Architect", "period": "Apr 2023 – May 2025",
+          "content": {
+            "description": "Led SOC cyber architecture for group IRM and ERP, hands-on, focused on protecting 10+ cloud tenants, responsible for threat modeling, defining default security controls, contributing to vision and roadmap for global cyber team: SIEM, SOAR, EDR, Vulnerability, IAM, Cloud Posture.",
+            "points": ["Delivered multiple six-figure savings through architecture changes."],
+            "overrides": {}
+          }
+        },
+        {
+          "title": "Lead Cyber Security Vulnerability Analyst", "period": "Apr 2020 – Apr 2023",
+          "content": {
+            "description": "Led global SOC vulnerability management mission across discovery, analysis, prioritisation, remediation, mitigation and reporting.",
+            "points": [
+              "Automated end-to-end vulnerability management; reduced critical attack surface by 99%.",
+              "Built an in-house [**Shodan-like** search engine](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.confGO%202022%20Hilversum%20-%20Your%20META(DATA)%20is%20QUEEN%20for%20Cyber-Security%20Vulnerability%20Management.pdf) for IT/OT devices at scale.",
+              "Rapid7, ServiceNow SecOps VR, Splunk, CrowdStrike, Microsoft Defender for Endpoint, Wiz."
+            ],
+            "overrides": {}
+          }
+        },
+        {
+          "title": "Senior Cyber Security Data Scientist", "period": "Jun 2019 – Apr 2020",
+          "content": {
+            "description": "Delivered ML, AI and NLP strategy for the global SOC Cyber Security team.",
+            "points": ["Pitched first version of an AI chatbot for SOC Operations at Integrate 2019, London. Pre-ChatGPT moment!", "C#, Bot Framework, Microsoft LUIS, API Management, Azure Logic Apps and Functions."],
+            "overrides": {}
+          }
+        },
+        {
+          "title": "Cyber Security Threat Hunter", "period": "Nov 2016 – Jun 2019",
+          "content": {
+            "description": "Found unknown threats and weaknesses in security controls using SIEM detections, threat intelligence and incident log evidence.",
+            "points": ["Group CIO awarded; found two threats that prevented ransomware opportunities.", "Splunk, FireEye HX, CrowdStrike Falcon, Microsoft Defender for Endpoint"],
+            "overrides": {}
+          }
+        }
+      ]
+    },
+    {
+      "company": "SIA, Indra group", "location": "Madrid, Spain", "period": "Apr 2016 – Jul 2016",
+      "roles": [{
+        "title": "Senior Cyber Security Consultant · Pentester / Red Team", "period": "Apr 2016 – Jul 2016",
+         "content": {
+           "description": "Red-team and offensive security consultant for Active Directory, web applications and perimeter security.",
+           "points": ["Obtained Domain Admin privileges in a large Spanish bank red-team assignment."],
+           "overrides": {}
+         }
+      }]
+    },
+    {
+      "company": "Shell plc", "location": "Valencia, Venezuela", "period": "Dec 2008 – Feb 2012",
+      "roles": [{
+        "title": "Database Administrator / Software Developer", "period": "Dec 2008 – Feb 2012",
+         "content": {
+           "description": "Architected, developed and distributed Microsoft SQL Server and C# applications.",
+           "points": ["Built a C# integration app and BI solution rolled out across northern Latin America."],
+           "overrides": {}
+         }
+      }]
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "Cybersecurity Master's Degree", "school": "Universidad Europea", "location": "Madrid, Spain",
+      "period": "Oct 2013 – Jul 2014", "detail": "1 year, published dissertation, grade 85.60/100.",
+      "url": "https://github.com/daniel0x00/r2dr2-udp-drdos-tool"
+    },
+    {
+      "degree": "Bachelor of Information Technology", "school": "Universidad Tecnologica del Centro UNITEC", "location": "Valencia, Venezuela",
+      "period": "Jan 2007 – Dec 2011", "detail": "5 years, Cum Laude, #1 Honour Roll, grade 87.17/100.\nEU officially accredited."
+    }
+  ],
+
+  "skills": [
+    { "k": "AI-first, agent-enabled SOCs", "s": "Ability to create and maintain Enterprise-ready AI agents for SOC Operations to achieve ~5x delivery.", "tags": ["opencode", "Claude Code", "Codex", "MCP"] },
+    { "k": "Offensive security", "s": "Red team / Pentest skills.", "tags": ["Red team", "C2", "Reverse engineering"] },
+    { "k": "Windows & Linux security", "s": "Hands-on ops on both OSes: EDR, forensics, IoC hunting; Bash/PowerShell automation from exploit validation at scale to SIEM telemetry pipelines for tens of thousands of servers.", "tags": ["EDR", "Forensics", "Logging"] },
+    { "k": "Programming & secure coding", "s": "Senior dev background: C#, PowerShell, SQL Server, PostgreSQL, SPL, KQL. Now shipping most code through agentic pipelines with review gates, tests and Human-in-the-Loop.", "tags": ["C#", "PowerShell", "MSSQL", "SPL/KQL"] },
+    { "k": "Threat modeling & detection", "s": "STRIDE on critical systems and APIs; pragmatic risk assessments; intel TTPs translated to SPL/KQL detections and IR playbooks.", "tags": ["STRIDE", "ATT&CK", "Detection-as-code"] },
+    { "k": "Leadership & communication", "s": "Leads FTEs, contractors, MSSPs and a fleet of AI agents; mentoring and comms up to CIO/CISO; public keynote speaker; yearly anonymous peer feedback.", "tags": ["C-level comms", "MSP management", "Coaching"] },
+    { "k": "Cloud expertise", "s": "Azure Expert-certified (Solutions Architect + Cybersecurity Architect). Wiz rollout for multi-cloud CSPM across AWS, Alibaba, Azure China and Azure; hardened PaaS with monitoring and response automation.", "tags": ["Azure certified", "CSPM", "Cloud hardening"] }
+  ],
+
+  "certifications": [
+    { "name": "Microsoft Certified: Azure Solutions Architect Expert", "since": "holder since 2017 · active", "url": "https://learn.microsoft.com/api/credentials/share/en-gb/daniel0x00/AC29E0E751C6D24D?sharingId=AE96336F33648BCE", "verifyNote": "verifiable Microsoft credential link" },
+    { "name": "Microsoft Certified: Cybersecurity Architect Expert", "since": "holder since 2022 · active", "url": "https://learn.microsoft.com/api/credentials/share/en-gb/daniel0x00/6E4E954136076FE?sharingId=AE96336F33648BCE", "verifyNote": "verifiable Microsoft credential link" }
+  ],
+
+  "honours": [
+    { "t": "[Agentic SOC platform](https://cv.ferreira.fm/portfolio-agentic-SOC.html)", "d": "Designed and shipped an identity-first, fully audited agentic platform running 24/7 SOC operations." },
+    { "t": "Shell Group CIO Award winner, twice", "d": "Recognized for detecting material cyber risk and preventing ransomware-like opportunities." },
+    { "t": "[Splunk .conf21 speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.conf21%20-%20SEC1075A%20-%20Effective%20and%20affordable%20Cyber-Security%20Vulnerability%20Management.pdf)", "d": "Vulnerability Management at scale. Advanced level." },
+    { "t": "[Splunk .confGO Netherlands speaker](https://github.com/daniel0x00/splunk.conf-keynotes/blob/91b0886a7b179cf2d63827b7fa81ddb05ae5f237/Splunk%20.confGO%202022%20Hilversum%20-%20Your%20META(DATA)%20is%20QUEEN%20for%20Cyber-Security%20Vulnerability%20Management.pdf)", "d": "How to build an internal Shodan-like search engine. Advanced level." },
+    { "t": "[Published PowerShell packages and code](https://github.com/daniel0x00?tab=repositories)", "d": "Infoblox Grid, Exchange permissions, Yahoo Finance, FireEyeHX and more." }
+  ],
+
+  "contact": {
+    "email": "gourd-farrier.6p@icloud.com",
+    "linkedin": "https://www.linkedin.com/in/daferreira/",
+    "github": "https://github.com/daniel0x00",
+    "location": "The Hague, Netherlands",
+    "citizenship": "Spain / EU",
+    "languages": "English, Spanish",
+    "note": "For privacy reasons and to combat spam, the email shown is a disposable email address that changes over time. You can write there and I will receive it. Please do expect a response from my real email address ending in `@ferreira.fm`.",
+    "noteColor": "#e5c07b"
+  },
+
+  "compensation": {
+    "title": "Compensation analysis",
+    "description": "Lossdog.com analyzes professional worth and compensation from resume and career history.",
+    "url": "https://app.lossdog.com/share/profile-report/d2a26f68-00ec-40a2-8a42-f7d95d106201/",
+    "linkText": "View Daniel's total compensation analysis"
+  }
+}
