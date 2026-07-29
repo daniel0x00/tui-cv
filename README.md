@@ -48,6 +48,11 @@ templates.
 - `build.py` generates the public outputs.
 - `portfolio-agentic-SOC.html` is an independent public architecture page.
 
+The Markdown export can append an additional source Markdown file through
+`outputs.md.appendix` in `config.json`. The appendix is included only in
+`D.A.Ferreira.md`; it is not included in the TUI or PDF. Appendix headings are
+automatically nested below the generated `## Appendix` heading.
+
 ## GitHub Pages
 
 The repository is published from the `main` branch root using GitHub Pages.

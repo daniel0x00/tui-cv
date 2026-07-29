@@ -94,6 +94,13 @@ def safe_basename(value: object, path: str, errors: list[str]) -> None:
         errors.append(f"{path} must be a safe base filename without a path or extension")
 
 
+def safe_markdown_filename(value: object, path: str, errors: list[str]) -> None:
+    """Validate a Markdown input filename confined to the project root."""
+    if (not isinstance(value, str) or not value or Path(value).name != value
+            or "/" in value or "\\" in value or not value.lower().endswith(".md")):
+        errors.append(f"{path} must be a safe project-root Markdown filename")
+
+
 def validate_sections(value: object, path: str, allowed: tuple[str, ...], errors: list[str]) -> None:
     """Ensure an output section selection is an ordered, duplicate-free list."""
     if not isinstance(value, list) or not all(isinstance(section, str) for section in value):
@@ -177,13 +184,23 @@ def validate(cfg: object) -> list[str]:
                     match = CSS_UNIT_RE.fullmatch(value) if isinstance(value, str) else None
                     if not match or float(match.group(1)) <= 0: errors.append(f"outputs.pdf.fontSizes.{key} must be a positive size with an explicit safe unit")
             validate_sections(pdf["sections"], "outputs.pdf.sections", PDF_SECTION_NAMES, errors)
-        if not isinstance(markdown, dict) or set(markdown) != {"filename", "enabled", "header", "footer", "sections"}:
-            errors.append("outputs.md must contain exactly filename, enabled, header, footer, and sections")
+        if not isinstance(markdown, dict) or set(markdown) != {"filename", "enabled", "header", "footer", "appendix", "sections"}:
+            errors.append("outputs.md must contain exactly filename, enabled, header, footer, appendix, and sections")
         else:
             safe_basename(markdown["filename"], "outputs.md.filename", errors)
             if not isinstance(markdown["enabled"], bool): errors.append("outputs.md.enabled must be a boolean")
             for key in ("header", "footer"):
                 if not isinstance(markdown[key], str): errors.append(f"outputs.md.{key} must be a string")
+            appendix = markdown["appendix"]
+            if not isinstance(appendix, dict) or set(appendix) != {"enabled", "filename", "title"}:
+                errors.append("outputs.md.appendix must contain exactly enabled, filename, and title")
+            else:
+                if not isinstance(appendix["enabled"], bool): errors.append("outputs.md.appendix.enabled must be a boolean")
+                safe_markdown_filename(appendix["filename"], "outputs.md.appendix.filename", errors)
+                if not isinstance(appendix["title"], str) or not appendix["title"].strip() or "\n" in appendix["title"] or "\r" in appendix["title"]:
+                    errors.append("outputs.md.appendix.title must be a non-empty single-line string")
+                elif appendix["enabled"] and not (HERE / appendix["filename"]).is_file():
+                    errors.append(f"outputs.md.appendix.filename '{appendix['filename']}' not found in {HERE}")
             validate_sections(markdown["sections"], "outputs.md.sections", MD_SECTION_NAMES, errors)
 
     compensation = cfg["compensation"]
@@ -445,6 +462,63 @@ def markdown_link(label: str, url: object) -> str:
     return f"[{label}]({url})" if safe_url(url) else label
 
 
+ATX_HEADING_RE = re.compile(r"^( {0,3})(#{1,6})([ \t]+.*)$")
+FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
+
+
+def normalize_appendix_headings(markdown: str) -> str:
+    """Nest an appendix's headings below the generated Appendix heading."""
+    lines = markdown.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    first_level = None
+    in_fence = False
+    fence_marker = ""
+    for line in lines:
+        fence = FENCE_RE.match(line)
+        if fence:
+            marker = fence.group(1)[0]
+            if not in_fence:
+                in_fence, fence_marker = True, marker
+            elif marker == fence_marker:
+                in_fence, fence_marker = False, ""
+            continue
+        if not in_fence and (heading := ATX_HEADING_RE.match(line)):
+            first_level = len(heading.group(2))
+            break
+    if first_level is None:
+        return markdown.strip()
+
+    shift = 3 - first_level
+    normalized = []
+    in_fence = False
+    fence_marker = ""
+    for line in lines:
+        fence = FENCE_RE.match(line)
+        if fence:
+            marker = fence.group(1)[0]
+            if not in_fence:
+                in_fence, fence_marker = True, marker
+            elif marker == fence_marker:
+                in_fence, fence_marker = False, ""
+            normalized.append(line)
+            continue
+        heading = ATX_HEADING_RE.match(line) if not in_fence else None
+        if heading:
+            level = min(6, max(1, len(heading.group(2)) + shift))
+            line = f"{heading.group(1)}{'#' * level}{heading.group(3)}"
+        normalized.append(line)
+    return "\n".join(normalized).strip()
+
+
+def append_markdown_appendix(content: str, cfg: dict) -> str:
+    """Append the configured Markdown file below a generated appendix heading."""
+    appendix = cfg["outputs"]["md"]["appendix"]
+    if not appendix["enabled"]:
+        return content
+    source = (HERE / appendix["filename"]).read_text(encoding="utf-8")
+    normalized = normalize_appendix_headings(source)
+    return f"{content.rstrip()}\n\n## {appendix['title'].strip()}\n\n{normalized}\n"
+
+
 def build_markdown(cfg: dict) -> str:
     """Build selected source-Markdown sections; source prose remains verbatim."""
     profile, contact = cfg["profile"], cfg["contact"]
@@ -513,7 +587,8 @@ def build_markdown(cfg: dict) -> str:
         "md.footer": lambda: f'---\n\n{cfg["outputs"]["md"]["footer"]}' if cfg["outputs"]["md"]["footer"] else "",
     }
     blocks = [renderers[section]() for section in cfg["outputs"]["md"]["sections"]]
-    return "\n\n".join(block for block in blocks if block).rstrip() + "\n"
+    content = "\n\n".join(block for block in blocks if block).rstrip() + "\n"
+    return append_markdown_appendix(content, cfg)
 
 
 def find_chrome(explicit: str | None) -> str:
