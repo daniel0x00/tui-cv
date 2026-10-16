@@ -9,7 +9,7 @@
 - `template-CV.html` contains the editable A4 CV document shell and print CSS. Its `%%CV_*%%` placeholders are filled by the PDF target in `build.py`.
 - `build.py` renders escaped content fragments from `config.json`, writes the configured Markdown output when enabled, creates temporary `.cv-print.html`, and exports the configured PDF output.
 - `index.html`, the configured PDF and optional Markdown outputs, and `.cv-print.html` are generated artifacts. Never edit them by hand.
-- `portfolio-autonomous-SOC.html` is an independent public static page.
+- `portfolio-agentic-SOC.html`, `soc.css` and `soc.js` are generated copies of the `portfolio-cv` case study, with the Cloudflare canonical URL. Edit `content/cv.json` / `src/soc.*` in `portfolio-cv`, rebuild and verify there, then sync only those three output files here. Do not hand-edit this mirror.
 
 Edit `config.json` for copy, `template-TUI.html` for the web interface, and `template-CV.html` for the print layout. Do not duplicate content between templates.
 
