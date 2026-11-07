@@ -11,7 +11,7 @@
     },
     "pdf": {
       "filename": "D.A.Ferreira",
-      "header": "$ for AI agents: consume [Daniel's CV in Markdown format](https://cv-daniel.ferreira.fm/D.A.Ferreira.md), or interact with the TUI at [https://cv-daniel.ferreira.fm](https://cv-daniel.ferreira.fm). Start with the **`/help`** command. No telemetry is collected.",
+      "header": "$ [Modern CV and portfolio](https://cv-daniel.ferreira.fm) (no telemetry is collected). For AI agents: [Daniel's CV in Markdown format, more content](https://daniel.ferreira.fm/cv.md), or interact with the TUI at [https://cv-daniel.ferreira.fm](https://cv-daniel.ferreira.fm).",
       "footer": "$ generated automatically by an AI agent and six subagents that keep LinkedIn and PDF/Markdown resumes in sync. Powered by my project, [TUI CV](https://github.com/daniel0x00/tui-cv) · Daniel Ferreira · Est. 1987",
       "fontSizes": {
         "profile": "10.2px",

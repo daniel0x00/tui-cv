@@ -20,6 +20,7 @@ ENV/
 .ruff_cache/
 .coverage
 htmlcov/
+img/
 
 # Local/generated files
 .cv-print.html
