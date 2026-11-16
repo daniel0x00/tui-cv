@@ -24,7 +24,7 @@
       <a class="home-link" href="https://daniel.ferreira.fm/"><span class="wordmark" aria-hidden="true">df.</span><span>Daniel Ferreira / Home</span></a>
       <div class="motion-tools" hidden><button class="motion-control" type="button" aria-pressed="false" aria-describedby="motion-state" data-motion data-pause-label="Pause motion" data-resume-label="Resume motion" data-reduced-label="Reduced motion"><span class="motion-icon" aria-hidden="true"></span>Diagram motion</button><span id="motion-state">Resume motion</span></div>
     </div>
-    <nav class="section-nav wrap" aria-label="Case study sections"><a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#capabilities">Capabilities</a><a href="#story">In practice</a><a href="#guardrails">Guardrails</a><a href="#roadmap">Roadmap</a></nav>
+    <nav class="section-nav wrap" aria-label="Case study sections"><a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#capabilities">Capabilities</a><a href="#story">In practice</a><a href="#guardrails">Guardrails</a></nav>
   </header>
   <main id="main" tabindex="-1">
     <section id="overview" class="hero" aria-labelledby="overview-title" tabindex="-1">
@@ -55,15 +55,20 @@
       <div class="wrap">
         <div class="section-heading" data-reveal><span class="index" aria-hidden="true">02</span><h2 id="architecture-title">Reasoning and execution have separate routes.</h2></div>
         <div class="architecture-intro"><p>The model gateway routes requests for reasoning. A separate Function gateway governs tool execution. Evidence comes back to analysts, who review the findings and any consequential action.</p><p class="notice">A model can recommend an action; it cannot grant itself access.</p></div>
-        <ol class="architecture-paths" role="list"><li class="path" data-reveal>
+        <ol class="architecture-paths" role="list"><li class="path path-1" data-reveal>
           <h3 class="path-title"><span class="index" aria-hidden="true">01</span>Direct and reason</h3>
-          <ol class="path-steps" role="list"><li class="path-step"><span class="index" aria-hidden="true">01</span><h4>Human</h4><p>Sets the question and boundaries.</p></li><li class="path-step"><span class="index" aria-hidden="true">02</span><h4>OpenCode + Codex</h4><p>Coordinate specialised agents and documented procedures.</p></li><li class="path-step"><span class="index" aria-hidden="true">03</span><h4>Model API gateway / OmniRoute</h4><p>Routes models and helps optimise token use.</p></li><li class="path-step"><span class="index" aria-hidden="true">04</span><h4>Model intelligence</h4><p>OpenAI and Anthropic models, including through Azure Foundry.</p></li></ol>
-          <div class="path-connector" aria-hidden="true"><span>↓</span></div>
-        </li><li class="path" data-reveal>
-          <h3 class="path-title"><span class="index" aria-hidden="true">02</span>Execute and review</h3>
-          <ol class="path-steps" role="list"><li class="path-step"><span class="index" aria-hidden="true">05</span><h4>Governed MCP / tools</h4><p>Agents request operations within their scope.</p></li><li class="path-step"><span class="index" aria-hidden="true">06</span><h4>Entra-gated Function gateway</h4><p>Records the request before execution; stops if audit logging fails.</p></li><li class="path-step"><span class="index" aria-hidden="true">07</span><h4>Systems</h4><p>Sentinel, Defender, Entra, Azure, ServiceNow, SharePoint and Outlook.</p></li><li class="path-step"><span class="index" aria-hidden="true">08</span><h4>Evidence / human-approved actions</h4><p>Findings return to people; consequential actions require approval.</p></li></ol>
-          
+          <ol class="path-steps" role="list"><li class="path-step"><div class="flow-node"><span class="flow-icon" aria-hidden="true">●</span><div class="flow-copy"><span class="index" aria-hidden="true">01</span><h4>Human</h4><p>Sets the question and boundaries.</p></div></div></li><li class="path-step"><div class="flow-node"><span class="flow-icon flow-icon-product" aria-hidden="true">OC / CX</span><div class="flow-copy"><span class="index" aria-hidden="true">02</span><h4>OpenCode + Codex</h4><p>Coordinate specialised agents and documented procedures.</p></div></div></li><li class="path-step"><div class="flow-node"><span class="flow-icon flow-icon-product" aria-hidden="true">OMNI</span><div class="flow-copy"><span class="index" aria-hidden="true">03</span><h4>AI API gateway / OmniRoute</h4><p>Routes models and helps optimise token use.</p></div></div></li><li class="path-step"><div class="flow-node"><span class="flow-icon" aria-hidden="true">✦</span><div class="flow-copy"><span class="index" aria-hidden="true">04</span><h4>Model intelligence</h4><p>OpenAI and Anthropic models, including through Azure Foundry.</p></div></div></li></ol>
+        </li><li class="path path-2" data-reveal>
+          <h3 class="path-title"><span class="index" aria-hidden="true">02</span>Access tools and review</h3>
+          <ol class="path-steps" role="list"><li class="path-step"><div class="flow-node"><span class="flow-icon flow-icon-product" aria-hidden="true">MCP</span><div class="flow-copy"><span class="index" aria-hidden="true">05</span><h4>Governed MCP / tools</h4><p>Agents request operations within their scope.</p></div></div></li><li class="path-step"><div class="flow-node"><span class="flow-icon flow-icon-product" aria-hidden="true">ENTRA</span><div class="flow-copy"><span class="index" aria-hidden="true">06</span><h4>Entra-gated Function gateway</h4><p>Records the request before execution; stops if audit logging fails.</p></div></div></li><li class="path-step"><div class="flow-node"><span class="flow-icon" aria-hidden="true">▦</span><div class="flow-copy"><span class="index" aria-hidden="true">07</span><h4>Systems</h4><p>Sentinel, Defender, Entra, Azure, ServiceNow, SharePoint and Outlook.</p></div></div></li><li class="path-step"><div class="flow-node"><span class="flow-icon" aria-hidden="true">✓</span><div class="flow-copy"><span class="index" aria-hidden="true">08</span><h4>Evidence / human-approved actions</h4><p>Findings return to people; consequential actions require approval.</p></div></div></li></ol>
         </li></ol>
+        <div class="route-connections">
+          <h3>How the routes connect</h3>
+          <ol role="list">
+            <li><span>OpenCode + Codex</span><span class="connection-arrow" aria-hidden="true">→</span><span>Requests scoped tools</span><span class="connection-arrow" aria-hidden="true">→</span><span>Governed MCP / tools</span></li>
+            <li><span>Evidence / human-approved actions</span><span class="connection-arrow" aria-hidden="true">→</span><span>Evidence returns for review</span><span class="connection-arrow" aria-hidden="true">→</span><span>Human</span></li>
+          </ol>
+        </div>
       </div>
     </section>
     <section id="capabilities" class="capabilities section-space wrap" aria-labelledby="capabilities-title" tabindex="-1">
@@ -80,12 +85,6 @@
     <section id="guardrails" class="guardrails section-space wrap" aria-labelledby="guardrails-title" tabindex="-1">
       <div class="section-heading" data-reveal><span class="index" aria-hidden="true">05</span><h2 id="guardrails-title">Boundaries built into the workflow.</h2></div>
       <ul class="guardrail-list" role="list"><li data-reveal><span class="index" aria-hidden="true">01</span><h3>Identity</h3><p>Entra SSO, app roles and managed identities govern access without shared operator passwords.</p></li><li data-reveal><span class="index" aria-hidden="true">02</span><h3>Audit before execute</h3><p>Audited routes record the request server-side before execution and stop if recording fails.</p></li><li data-reveal><span class="index" aria-hidden="true">03</span><h3>Least privilege</h3><p>Scoped permissions and network-isolated connectors limit what tools can reach.</p></li><li data-reveal><span class="index" aria-hidden="true">04</span><h3>Human approval &amp; PII</h3><p>Approval gates, prompt guardrails and personal-data controls support accountable use.</p></li></ul>
-    </section>
-    <section id="roadmap" class="roadmap section-space" aria-labelledby="roadmap-title" tabindex="-1">
-      <div class="wrap roadmap-grid">
-        <div><div class="section-heading" data-reveal><span class="index" aria-hidden="true">06</span><h2 id="roadmap-title">Not yet implemented.</h2></div><p class="status">Pending roadmap</p></div>
-        <div><ul class="roadmap-list" role="list"><li data-reveal><h3>Network integrations</h3><p>Zscaler ZIA / ZPA and Palo Alto connectors for traffic, policy and firewall analysis are pending.</p></li><li data-reveal><h3>Active containment</h3><p>Blocking indicators, acquiring or removing files, email quarantine and device isolation are pending. Human approval would be required.</p></li></ul><p class="note roadmap-note">OT vulnerability coverage, CyberArk identities and expansion across OT, AWS and legacy estates are also marked as pending in the original blueprint.</p></div>
-      </div>
     </section>
     <section class="closing section-space wrap" aria-labelledby="closing-title"><h2 id="closing-title">Interested in the work?</h2><a class="button button-dark" href="https://daniel.ferreira.fm/#contact">Discuss the work <span aria-hidden="true">↗</span></a></section>
   </main>
