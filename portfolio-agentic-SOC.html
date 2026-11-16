@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Agentic SOC | Daniel Ferreira</title>
-  <meta name="description" content="An identity-first Agentic SOC built at SKF: model routing, governed tools and human oversight. An illustrated architecture case study by Daniel Ferreira.">
+  <meta name="description" content="An identity-first security operations platform at SKF, connecting AI agents to governed tools and analyst review. A case study by Daniel Ferreira.">
   <link rel="canonical" href="https://daniel.ferreira.fm/portfolio-agentic-SOC.html">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://daniel.ferreira.fm/portfolio-agentic-SOC.html">
   <meta property="og:title" content="Agentic SOC | Daniel Ferreira">
-  <meta property="og:description" content="An identity-first Agentic SOC built at SKF: model routing, governed tools and human oversight. An illustrated architecture case study by Daniel Ferreira.">
+  <meta property="og:description" content="An identity-first security operations platform at SKF, connecting AI agents to governed tools and analyst review. A case study by Daniel Ferreira.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Agentic SOC | Daniel Ferreira">
-  <meta name="twitter:description" content="An identity-first Agentic SOC built at SKF: model routing, governed tools and human oversight. An illustrated architecture case study by Daniel Ferreira.">
-  <meta name="theme-color" content="#09182d">
+  <meta name="twitter:description" content="An identity-first security operations platform at SKF, connecting AI agents to governed tools and analyst review. A case study by Daniel Ferreira.">
+  <meta name="theme-color" content="#f7f7f4">
   <link rel="stylesheet" href="/soc.css">
   <script src="/soc.js" defer></script>
 </head>
@@ -32,9 +32,9 @@
         <div class="hero-copy">
           <p class="eyebrow">Selected work / SKF</p>
           <h1 id="overview-title">Agentic SOC.</h1>
-          <p class="hero-serif">Human judgement. Amplified.</p>
-          <p class="hero-description">At SKF, I built an identity-first Agentic SOC platform and internal Cyber MCP, bringing specialised agents and documented procedures to security engineering and operations. Less repetitive work. More context for the analyst. Consequential decisions stay with people.</p>
-          <a class="button" href="#architecture">Follow the architecture <span aria-hidden="true">↗</span></a>
+          <p class="hero-serif">Security operations, with people in control.</p>
+          <p class="hero-description">At SKF, I built an identity-first platform and internal Cyber MCP to connect specialised agents, documented procedures and security tools. The aim: give analysts useful evidence and reduce repetitive work, while keeping consequential decisions with people.</p>
+          <a class="button" href="#architecture">Explore the system <span aria-hidden="true">↗</span></a>
         </div>
         <div class="core-visual" aria-hidden="true">
           <div class="core-orbit"></div><div class="core-orbit orbit-inner"></div>
@@ -44,50 +44,50 @@
           <div class="core-label core-label-bottom">Evidence / human-approved actions</div>
           <div class="core-signal"></div>
         </div>
-        <p class="notice hero-notice">Architecture overview · illustration only. This page is not connected to operational systems.</p>
+        <p class="notice hero-notice">Illustrated architecture · not connected to operational systems</p>
       </div>
     </section>
     <section class="outcomes wrap" aria-labelledby="outcomes-title">
-      <div class="outcomes-intro"><h2 id="outcomes-title">Delivery, with control.</h2><p class="note">Reported impact across security engineering and operational delivery at SKF.</p></div>
-      <dl class="outcome-list"><div><dt>Security engineering &amp; operational delivery increase</dt><dd>~5x</dd></div><div><dt>AI-enabled SOC operations</dt><dd>24/7</dd></div><div><dt>Password-less, governed access</dt><dd>Identity-first</dd></div></dl>
+      <div class="outcomes-intro"><h2 id="outcomes-title">The work in context.</h2><p class="note">Owner-reported impact and operating model at SKF.</p></div>
+      <dl class="outcome-list"><div><dt>Increase in security engineering and operational delivery</dt><dd>~5x</dd></div><div><dt>AI-enabled security operations</dt><dd>24/7</dd></div><div><dt>Password-less access to governed tools</dt><dd>Identity-first</dd></div></dl>
     </section>
     <section id="architecture" class="architecture section-space" aria-labelledby="architecture-title" tabindex="-1">
       <div class="wrap">
-        <div class="section-heading" data-reveal><span class="index" aria-hidden="true">02</span><h2 id="architecture-title">Two gateways. Different jobs.</h2></div>
-        <div class="architecture-intro"><p>The model gateway routes reasoning requests; the Function gateway controls tool execution. Model output grants no system access. Evidence returns to people for review.</p><p class="notice">Reasoning → governed execution → analyst review.</p></div>
+        <div class="section-heading" data-reveal><span class="index" aria-hidden="true">02</span><h2 id="architecture-title">Reasoning and execution have separate routes.</h2></div>
+        <div class="architecture-intro"><p>The model gateway routes requests for reasoning. A separate Function gateway governs tool execution. Evidence comes back to analysts, who review the findings and any consequential action.</p><p class="notice">A model can recommend an action; it cannot grant itself access.</p></div>
         <ol class="architecture-paths" role="list"><li class="path" data-reveal>
-          <h3 class="path-title"><span class="index" aria-hidden="true">01</span>Human direction → model reasoning</h3>
-          <ol class="path-steps" role="list"><li class="path-step"><span class="index" aria-hidden="true">01</span><h4>Human</h4><p>Sets intent and boundaries.</p></li><li class="path-step"><span class="index" aria-hidden="true">02</span><h4>OpenCode + Codex</h4><p>Harnesses coordinate agents and procedures.</p></li><li class="path-step"><span class="index" aria-hidden="true">03</span><h4>Model API gateway / OmniRoute</h4><p>Model routing and token optimisation.</p></li><li class="path-step"><span class="index" aria-hidden="true">04</span><h4>Model intelligence</h4><p>OpenAI / Anthropic reasoning, including Azure Foundry models.</p></li></ol>
+          <h3 class="path-title"><span class="index" aria-hidden="true">01</span>Direct and reason</h3>
+          <ol class="path-steps" role="list"><li class="path-step"><span class="index" aria-hidden="true">01</span><h4>Human</h4><p>Sets the question and boundaries.</p></li><li class="path-step"><span class="index" aria-hidden="true">02</span><h4>OpenCode + Codex</h4><p>Coordinate specialised agents and documented procedures.</p></li><li class="path-step"><span class="index" aria-hidden="true">03</span><h4>Model API gateway / OmniRoute</h4><p>Routes models and helps optimise token use.</p></li><li class="path-step"><span class="index" aria-hidden="true">04</span><h4>Model intelligence</h4><p>OpenAI and Anthropic models, including through Azure Foundry.</p></li></ol>
           <div class="path-connector" aria-hidden="true"><span>↓</span></div>
         </li><li class="path" data-reveal>
-          <h3 class="path-title"><span class="index" aria-hidden="true">02</span>Governed tools → accountable operations</h3>
-          <ol class="path-steps" role="list"><li class="path-step"><span class="index" aria-hidden="true">05</span><h4>Governed MCP / tools</h4><p>Harnesses request scoped operations.</p></li><li class="path-step"><span class="index" aria-hidden="true">06</span><h4>Entra-gated Function gateway</h4><p>Audit first; execute only if the record succeeds.</p></li><li class="path-step"><span class="index" aria-hidden="true">07</span><h4>Systems</h4><p>Sentinel, Defender, Entra, Azure, ServiceNow, SharePoint and Outlook.</p></li><li class="path-step"><span class="index" aria-hidden="true">08</span><h4>Evidence / human-approved actions</h4><p>Reports and recommendations; people approve consequential actions.</p></li></ol>
+          <h3 class="path-title"><span class="index" aria-hidden="true">02</span>Execute and review</h3>
+          <ol class="path-steps" role="list"><li class="path-step"><span class="index" aria-hidden="true">05</span><h4>Governed MCP / tools</h4><p>Agents request operations within their scope.</p></li><li class="path-step"><span class="index" aria-hidden="true">06</span><h4>Entra-gated Function gateway</h4><p>Records the request before execution; stops if audit logging fails.</p></li><li class="path-step"><span class="index" aria-hidden="true">07</span><h4>Systems</h4><p>Sentinel, Defender, Entra, Azure, ServiceNow, SharePoint and Outlook.</p></li><li class="path-step"><span class="index" aria-hidden="true">08</span><h4>Evidence / human-approved actions</h4><p>Findings return to people; consequential actions require approval.</p></li></ol>
           
         </li></ol>
       </div>
     </section>
     <section id="capabilities" class="capabilities section-space wrap" aria-labelledby="capabilities-title" tabindex="-1">
-      <div class="section-heading" data-reveal><span class="index" aria-hidden="true">03</span><h2 id="capabilities-title">Six capabilities. One operating model.</h2></div>
-      <ul class="capability-grid" role="list"><li class="capability" data-reveal><span class="index" aria-hidden="true">01</span><h3>Identity &amp; estate</h3><p>Connect identities, privileged roles, device ownership and Azure inventory to understand access, coverage and risk.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">02</span><h3>Vulnerability &amp; exposure</h3><p>Track endpoint vulnerabilities, remediation ageing and external exposure; use reconnaissance, DNS and reputation checks to investigate.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">03</span><h3>Detect &amp; investigate</h3><p>Enrich Sentinel alerts with Defender hunting, identity context and threat intelligence for evidence-led triage.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">04</span><h3>ITSM &amp; knowledge</h3><p>Connect ServiceNow incidents and ownership with SharePoint playbooks and markdown-first procedures, keeping investigation knowledge reusable.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">05</span><h3>Reporting &amp; assurance</h3><p>Turn telemetry into private reports and posture summaries; support TISAX control guidance and audit-evidence lookup.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">06</span><h3>Human-led response</h3><p>Give analysts documented findings and proposed next steps. Active containment automation remains pending, not a live capability.</p></li></ul>
+      <div class="section-heading" data-reveal><span class="index" aria-hidden="true">03</span><h2 id="capabilities-title">Where the platform is used.</h2></div>
+      <ul class="capability-grid" role="list"><li class="capability" data-reveal><span class="index" aria-hidden="true">01</span><h3>Identity &amp; estate</h3><p>Bring together identities, privileged roles, device ownership and Azure inventory to examine access and coverage.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">02</span><h3>Vulnerability &amp; exposure</h3><p>Investigate endpoint vulnerabilities, remediation ageing and external exposure using reconnaissance, DNS and reputation checks.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">03</span><h3>Detect &amp; investigate</h3><p>Add Defender hunting, identity context and threat intelligence to Sentinel alerts for analyst triage.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">04</span><h3>ITSM &amp; knowledge</h3><p>Link ServiceNow incidents and ownership with SharePoint playbooks and markdown-first procedures.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">05</span><h3>Reporting &amp; assurance</h3><p>Produce private posture reports and support TISAX guidance and audit-evidence lookup.</p></li><li class="capability" data-reveal><span class="index" aria-hidden="true">06</span><h3>Human-led response</h3><p>Present findings and proposed next steps to analysts. Active containment automation remains pending.</p></li></ul>
     </section>
     <section id="story" class="story section-space" aria-labelledby="story-title" tabindex="-1">
       <div class="wrap">
-        <div class="section-heading" data-reveal><span class="index" aria-hidden="true">04</span><h2 id="story-title">From alert to analyst.</h2></div>
-        <p class="notice">Illustrative workflow · from evidence to a human decision.</p>
-        <ol class="story-steps" role="list"><li data-reveal><span class="index" aria-hidden="true">01</span><h3>Receive</h3><p>A Sentinel alert supplies the starting entities and investigation question.</p></li><li data-reveal><span class="index" aria-hidden="true">02</span><h3>Investigate</h3><p>Agents follow procedures and request identity-gated, audited queries.</p></li><li data-reveal><span class="index" aria-hidden="true">03</span><h3>Enrich</h3><p>Device posture, identity context and threat intelligence inform the assessment.</p></li><li data-reveal><span class="index" aria-hidden="true">04</span><h3>Document</h3><p>Evidence, uncertainty and suggested next steps accompany the incident.</p></li><li data-reveal><span class="index" aria-hidden="true">05</span><h3>Review</h3><p>An analyst checks the findings and approves the response; no automatic containment is implied.</p></li></ol>
+        <div class="section-heading" data-reveal><span class="index" aria-hidden="true">04</span><h2 id="story-title">An investigation, step by step.</h2></div>
+        <p class="notice">Illustrative example · the analyst remains responsible for the decision</p>
+        <ol class="story-steps" role="list"><li data-reveal><span class="index" aria-hidden="true">01</span><h3>Receive</h3><p>A Sentinel alert provides the entities and the question to investigate.</p></li><li data-reveal><span class="index" aria-hidden="true">02</span><h3>Investigate</h3><p>Agents follow documented procedures and request identity-gated, audited queries.</p></li><li data-reveal><span class="index" aria-hidden="true">03</span><h3>Enrich</h3><p>Device posture, identity context and threat intelligence add context.</p></li><li data-reveal><span class="index" aria-hidden="true">04</span><h3>Document</h3><p>The incident record brings together evidence, uncertainty and suggested next steps.</p></li><li data-reveal><span class="index" aria-hidden="true">05</span><h3>Review</h3><p>An analyst reviews the findings and approves the response. The example does not imply automatic containment.</p></li></ol>
       </div>
     </section>
     <section id="guardrails" class="guardrails section-space wrap" aria-labelledby="guardrails-title" tabindex="-1">
-      <div class="section-heading" data-reveal><span class="index" aria-hidden="true">05</span><h2 id="guardrails-title">Control is part of the design.</h2></div>
-      <ul class="guardrail-list" role="list"><li data-reveal><span class="index" aria-hidden="true">01</span><h3>Identity</h3><p>Entra SSO, app roles and managed identities govern access, rather than shared operator passwords.</p></li><li data-reveal><span class="index" aria-hidden="true">02</span><h3>Audit before execute</h3><p>Audited routes write server-side records before execution and abort if recording fails.</p></li><li data-reveal><span class="index" aria-hidden="true">03</span><h3>Least privilege</h3><p>Scoped permissions and network-isolated connectors constrain what tools can reach.</p></li><li data-reveal><span class="index" aria-hidden="true">04</span><h3>Human approval &amp; PII</h3><p>Approval gates, prompt guardrails and personal-data controls keep automation accountable to people.</p></li></ul>
+      <div class="section-heading" data-reveal><span class="index" aria-hidden="true">05</span><h2 id="guardrails-title">Boundaries built into the workflow.</h2></div>
+      <ul class="guardrail-list" role="list"><li data-reveal><span class="index" aria-hidden="true">01</span><h3>Identity</h3><p>Entra SSO, app roles and managed identities govern access without shared operator passwords.</p></li><li data-reveal><span class="index" aria-hidden="true">02</span><h3>Audit before execute</h3><p>Audited routes record the request server-side before execution and stop if recording fails.</p></li><li data-reveal><span class="index" aria-hidden="true">03</span><h3>Least privilege</h3><p>Scoped permissions and network-isolated connectors limit what tools can reach.</p></li><li data-reveal><span class="index" aria-hidden="true">04</span><h3>Human approval &amp; PII</h3><p>Approval gates, prompt guardrails and personal-data controls support accountable use.</p></li></ul>
     </section>
     <section id="roadmap" class="roadmap section-space" aria-labelledby="roadmap-title" tabindex="-1">
       <div class="wrap roadmap-grid">
-        <div><div class="section-heading" data-reveal><span class="index" aria-hidden="true">06</span><h2 id="roadmap-title">What comes next.</h2></div><p class="status">Pending roadmap</p></div>
-        <div><ul class="roadmap-list" role="list"><li data-reveal><h3>Network integrations</h3><p>Zscaler ZIA / ZPA and Palo Alto connector integrations for traffic, policy and firewall analysis remain pending.</p></li><li data-reveal><h3>Active containment</h3><p>Blocking indicators, acquiring or removing files, email quarantine and device isolation remain pending, with human approval required.</p></li></ul><p class="note roadmap-note">The original blueprint also marks OT vulnerability coverage, CyberArk identities and OT/AWS/legacy estate expansion as pending.</p></div>
+        <div><div class="section-heading" data-reveal><span class="index" aria-hidden="true">06</span><h2 id="roadmap-title">Not yet implemented.</h2></div><p class="status">Pending roadmap</p></div>
+        <div><ul class="roadmap-list" role="list"><li data-reveal><h3>Network integrations</h3><p>Zscaler ZIA / ZPA and Palo Alto connectors for traffic, policy and firewall analysis are pending.</p></li><li data-reveal><h3>Active containment</h3><p>Blocking indicators, acquiring or removing files, email quarantine and device isolation are pending. Human approval would be required.</p></li></ul><p class="note roadmap-note">OT vulnerability coverage, CyberArk identities and expansion across OT, AWS and legacy estates are also marked as pending in the original blueprint.</p></div>
       </div>
     </section>
-    <section class="closing section-space wrap" aria-labelledby="closing-title"><h2 id="closing-title">Better tools. Accountable teams.</h2><a class="button button-dark" href="https://daniel.ferreira.fm/#contact">Discuss the work <span aria-hidden="true">↗</span></a></section>
+    <section class="closing section-space wrap" aria-labelledby="closing-title"><h2 id="closing-title">Interested in the work?</h2><a class="button button-dark" href="https://daniel.ferreira.fm/#contact">Discuss the work <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><p>Daniel Ferreira / Selected work</p><div><a class="text-link" href="https://daniel.ferreira.fm/portfolio-agentic-SOC.html">Canonical case study <span aria-hidden="true">↗</span></a><a class="text-link" href="#overview">Back to top <span aria-hidden="true">↗</span></a></div></footer>
 </body>
